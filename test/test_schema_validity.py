@@ -13,6 +13,7 @@ def test_schema_validity():
     for name in ("schema_base.json",
                  "schema_data.json",
                  "schema_node.json",
+                 "schema_prov_exe.json",
                  "schema_workflow.json"):
         with open(os.path.join(sch_pth, name), 'r') as f:
             schema = json.load(f)

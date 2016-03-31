@@ -19,6 +19,5 @@ def validate(workflow_descr):
         schema = json.load(f)
 
     refres = RefResolver("file:///%s/" % here, schema)
-    print "here", here
     val = Draft4Validator(schema, resolver=refres)
     return val.is_valid(workflow_descr)
