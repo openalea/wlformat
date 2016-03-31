@@ -1,12 +1,4 @@
-import json
-from jsonschema import Draft4Validator, RefResolver
-import os
-
-if os.path.exists("test"):
-    sch_pth = os.path.join(os.getcwd(), "src/openalea/wlformat/")
-else:
-    sch_pth = os.path.join(os.path.dirname(os.getcwd()),
-                           "src/openalea/wlformat/")
+from openalea.wlformat import data_interface
 
 
 def test_valid_schema():
@@ -22,10 +14,4 @@ def test_valid_schema():
         "ancestors": []
     }
 
-    with open(sch_pth + "schema_data.json", 'r') as f:
-        schema = json.load(f)
-
-    refres = RefResolver("file:///%s" % sch_pth, schema)
-    val = Draft4Validator(schema, resolver=refres)
-    assert val.is_valid(ddef)
-    # val.validate(ddef)
+    data_interface.validate(ddef)
