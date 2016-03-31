@@ -1,0 +1,52 @@
+{
+    "./.coverage": [], 
+    "./.coveragerc": [], 
+    "./.gitignore": [
+        "+K/4XGP2Peb5jWR7nzmpli9QQT/NXtwbXHyE3BnTHOEAdwTiRpmD0k++rjO/416VXZCr7l+3j3X8YUhN+Ku0MA=="
+    ], 
+    "./AUTHORS.rst": [], 
+    "./CONTRIBUTING.rst": [], 
+    "./HISTORY.rst": [], 
+    "./LICENSE": [
+        "K+/cXPOoUd3kCV74oh3eAd4jEM1Zl5ycOadeYhk++UgVDTAptzaSeEuVaeT1wD8qp3mxw2UXkNVnXY9uD0bEtg=="
+    ], 
+    "./MANIFEST.in": [
+        "68xb80xnCuwiJiFFi7EqNpTciZvvEP0Qf7as6Cf85I3B0c9+6A33Q9moDX+cDIOPye6ghsIa9oi2a6ee29h6zA=="
+    ], 
+    "./README.rst": [
+        "NpInImcdK7HQFLVdzLlDEZbA9uAEZaKM6lTCUCfQi5aOf93nTfnCh9DJp9Dr0ZWsxXLXTQrH3g+rbgh7kRECnA=="
+    ], 
+    "./doc/authors.rst": [], 
+    "./doc/contributing.rst": [], 
+    "./doc/history.rst": [], 
+    "./doc/index.rst": [], 
+    "./doc/installation.rst": [], 
+    "./doc/readme.rst": [], 
+    "./doc/usage.rst": [], 
+    "./dvlpt_requirements.txt": [
+        "7qCwtiSkTCCwUiBVSlCKEg4ALocoRmCb6MhuUhYiBnOh9kgt/8hxRo98NW6+HjxQOlV8XpRarjAQri/t912eXQ=="
+    ], 
+    "./requirements.txt": [
+        "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
+    ], 
+    "./setup.cfg": [
+        "4TAPwqD6Ppf57HSkkcfez4KLyyOQH8SYloJ1EqIqYdwNuU2/cu2dXWVqG9jTltcPJJut97zyvoYjlFuqW3uz9g=="
+    ], 
+    "./setup.py": [
+        "KeYiX9bmpjDN6MNGqFXVeBhOoP3AH4dTEwd1SJ8lCVA04rYT2ZhX/IegF2ZMJMqLvw3QN6C3BE1tMKgRbR6B8g==", 
+        "6tA9s9cbDHz4mx0PGt+gMLM9HamuOYqFGjwc7LYZcM72XjiUaG0A7g6hNS+gy8cS0FyZDnf46GLNwx0mNZUs7Q=="
+    ], 
+    "./src/openalea/__init__.py": [
+        "2sk8h+XTWcTrTYSvRscCbTRjJWyGdgJ2THbA3Zxte+SsX5+26bbGIwhHi8qUCrhYN6Tk86o3wjiPrTg+2wmDuA=="
+    ], 
+    "./src/openalea/wlformat/__init__.py": [
+        "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
+        "fIn+GWAvhWfY/9NV/Sw6VXI4UIvx1OTgGxXQ1U5+9JFQ4vhuETzkaQvz8W4M9rMDYlL0vAeRmP2p2DyMgcvb9A=="
+    ], 
+    "./src/openalea/wlformat/example.py": [], 
+    "./src/openalea/wlformat/version.py": [
+        "9u2W46jEMEMq3ZJFhNBSDLcfV8R73vM1FPWlZz2LsxyOwW1/0fpDM16Yxig6tFhfdhNxz+Qw8gX0btUZqB898w=="
+    ], 
+    "./test/__init__.py": [], 
+    "./test/test_example.py": []
+}

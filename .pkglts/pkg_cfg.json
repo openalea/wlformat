@@ -1,0 +1,40 @@
+{
+    "_pkglts": {
+        "auto_install": true, 
+        "install_front_end": "stdout", 
+        "use_prompts": false
+    }, 
+    "base": {
+        "namespace": "openalea", 
+        "owner": "revesansparole", 
+        "pkgname": "wlformat", 
+        "url": null
+    }, 
+    "coverage": {}, 
+    "doc": {
+        "description": "Objects descriptions for workflow related environments", 
+        "keywords": []
+    }, 
+    "github": {
+        "project": "{{key, base.pkgname}}"
+    }, 
+    "license": {
+        "name": "cecill-c", 
+        "organization": "OpenALEA", 
+        "project": "{{key, base.pkgname}}", 
+        "year": 2016
+    }, 
+    "pysetup": {
+        "author_email": "revesansparole@gmail.com", 
+        "author_name": "{{key, base.owner}}", 
+        "intended_versions": [
+            "27"
+        ]
+    }, 
+    "test": {}, 
+    "version": {
+        "major": 0, 
+        "minor": 1, 
+        "post": 0
+    }
+}
