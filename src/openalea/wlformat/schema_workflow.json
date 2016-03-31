@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Workflow",
+  "description": "Schema for workflows used in OpenAlea",
+  "allOf": [
+    {
+      "$ref": "file:schema_base.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "description": "Node types and local information associated with them",
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "file:schema_base.json#/definitions/id"
+              },
+              "label": {
+                "description": "local label overriding node name",
+                "type": "string"
+              },
+              "x": {
+                "description": "X position for display purpose only!",
+                "type": "number"
+              },
+              "y": {
+                "description": "Y position for display purpose only!",
+                "type": "number"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "description": "Connection from an output port to an input port",
+            "type": "object",
+            "properties": {
+              "source": {
+                "description": "Source node index",
+                "type": "integer"
+              },
+              "source_port": {
+                "description": "Local output port id",
+                "type": "string"
+              },
+              "target": {
+                "description": "Target node index",
+                "type": "integer"
+              },
+              "target_port": {
+                "description": "Local input port id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "source",
+              "source_port",
+              "target",
+              "target_port"
+            ]
+          }
+        }
+      },
+      "required": [
+        "nodes",
+        "links"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Data interface",
+  "description": "Schema to associate a type to data passed in between workflow nodes",
+  "allOf": [
+    {
+      "$ref": "schema_base.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "description": "Reference a json schema that describe the type of data this interface propose"
+        },
+        "ancestors": {
+          "description": "Kind of heritage structure to define same type of data",
+          "type": "array",
+          "items": {
+            "description": "Id of data interface",
+            "$ref": "file:schema_base.json#/definitions/id"
+          }
+        }
+      },
+      "required": [
+        "schema",
+        "ancestors"
+      ]
+    }
+  ]
+}

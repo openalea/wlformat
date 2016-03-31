@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Task or Workflow Node",
+  "description": "Schema for tasks used as workflow's nodes",
+  "definitions": {
+    "port": {
+      "description": "Either input or output port description",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Locally unique name among either inputs or outputs of this node",
+          "type": "string"
+        },
+        "interface": {
+          "description": "Valid identifier of port interface",
+          "type": "string"
+        },
+        "description": {
+          "description": "Short description of data expected on this port",
+          "type": "string"
+        },
+        "default": {
+          "description": "Default value associated to this port"
+        }
+      },
+      "required": [
+        "name",
+        "interface",
+        "description"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "file:schema_base.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "function": {
+          "description": "URI to function actually performing the task",
+          "type": "string"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/port"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/port"
+          }
+        }
+      },
+      "required": [
+        "function",
+        "inputs",
+        "outputs"
+      ]
+    }
+  ]
+}

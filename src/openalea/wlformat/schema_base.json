@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Common metadata for all object in workflow environment",
+  "description": "Common metadata shared by all objects in workflow world",
+  "definitions": {
+    "id": {
+      "description": "Unique id for a given object used to reference it worldwide",
+      "type": "string",
+      "minLength": 32,
+      "maxLength": 32
+    }
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "#/definitions/id"
+    },
+    "name": {
+      "description": "A display name",
+      "type": "string"
+    },
+    "author": {
+      "description": "Author who created this object",
+      "type": "string"
+    },
+    "version": {
+      "description": "Current version of this object",
+      "type": "integer",
+      "minimum": 0
+    },
+    "description": {
+      "description": "Short description of this object",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "author",
+    "version",
+    "description"
+  ]
+}
