@@ -166,3 +166,22 @@ def test_import_workflow_reuse_node_definitions():
     assert len(store) == 2
 
     assert wdef2['nodes'][0]['id'] == wdef['nodes'][0]['id']
+
+
+def test_import_workflow_return_none_for_composite_nodes():
+    cnf = CNF(name='dummy',
+              description='Some description',
+              category='doofus',
+              doc='Some Documentation',
+              inputs=[],
+              outputs=[],
+              elt_factory={
+                  2: ('openalea.numpy.creation', 'array'),
+                  3: ('openalea.data structure.list', 'list')},
+              elt_connections={4297110208: ('__in__', 0, 3, 0),
+                               4297110232: (2, 1, '__out__', 1)},
+              )
+
+    store = {}
+    wdef = wralea.import_workflow(cnf, store)
+    assert wdef is None

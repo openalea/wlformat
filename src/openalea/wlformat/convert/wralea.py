@@ -154,6 +154,9 @@ def import_workflow(cnf, store):
 
     Warnings: modify store in place
 
+    Warnings: do not handle CompositeNodes as in workflows
+              with connections to either __in__ or __out__
+
     Args:
         cnf: (CompositeNodeFactory)
         store: (dict of uid, def) elements definitions
@@ -161,6 +164,11 @@ def import_workflow(cnf, store):
     Returns:
         (dict) - workflow definition
     """
+    for lid, link in cnf.connections.items():
+        src, ipid, tgt, opid = link
+        if src == '__in__' or tgt == '__out__':
+            return None
+    
     wdef = dict(id=uuid1().hex,
                 name=cnf.name,
                 description=cnf.description,
