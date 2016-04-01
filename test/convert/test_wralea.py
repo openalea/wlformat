@@ -48,6 +48,20 @@ def test_import_node_reuse_interfaces_definitions():
     assert ndef2['outputs'][0]['interface'] == ndef['outputs'][0]['interface']
 
 
+def test_import_node_handle_none_instead_of_empty_lists():
+    nf = NF(name="color",
+            description="edit color",
+            category="datatype, image",
+            nodemodule="openalea.color.py_color",
+            nodeclass="ColorNode")
+
+    store = {}
+    ndef = wralea.import_node(nf, store, "pkg")
+    assert len(store) == 0
+    assert len(ndef['inputs']) == 0
+    assert len(ndef['outputs']) == 0
+
+
 def test_import_workflow():
     cnf = CNF(name='dummy',
               description='Some description',
