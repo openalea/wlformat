@@ -168,7 +168,7 @@ def import_workflow(cnf, store):
         src, ipid, tgt, opid = link
         if src == '__in__' or tgt == '__out__':
             return None
-    
+
     wdef = dict(id=uuid1().hex,
                 name=cnf.name,
                 description=cnf.description,
