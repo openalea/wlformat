@@ -66,7 +66,13 @@ class WorkflowPlotDirective(Directive):
                    }
 
     def run(self):
+        env = self.state.document.settings.env
+
         wkf_file = directives.uri(self.arguments[0])
+        if not os.path.isabs(wkf_file):
+            wkf_file = os.path.join(os.path.dirname(env.doc2path(env.docname)),
+                                    wkf_file)
+
         wkf_name = os.path.splitext(wkf_file)[0]
         svg_file = "%s.svg" % wkf_name
         if out_of_date(wkf_file, svg_file):
