@@ -1,5 +1,3 @@
-import json
-
 from openalea.wlformat.convert import graphviz
 
 
