@@ -15,5 +15,8 @@ recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 
 recursive-include doc *.rst
+include doc/conf.py
+include doc/Makefile
+include doc/make.bat
 
 # }}

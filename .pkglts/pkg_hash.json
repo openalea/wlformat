@@ -11,20 +11,29 @@
         "K+/cXPOoUd3kCV74oh3eAd4jEM1Zl5ycOadeYhk++UgVDTAptzaSeEuVaeT1wD8qp3mxw2UXkNVnXY9uD0bEtg=="
     ], 
     "./MANIFEST.in": [
-        "68xb80xnCuwiJiFFi7EqNpTciZvvEP0Qf7as6Cf85I3B0c9+6A33Q9moDX+cDIOPye6ghsIa9oi2a6ee29h6zA=="
+        "YTUhuNoVK2IXgwJI+cP4BUzbgzMOnHhc40N8Q9cw1rJVtKJq8xlQNaYwxt2Y8p+scpKOU4S445VaPOqWsEF6+Q=="
     ], 
     "./README.rst": [
         "NpInImcdK7HQFLVdzLlDEZbA9uAEZaKM6lTCUCfQi5aOf93nTfnCh9DJp9Dr0ZWsxXLXTQrH3g+rbgh7kRECnA=="
     ], 
+    "./doc/Makefile": [
+        "fCpQbGBjkltJc0kS1o3WrQeqpsOzMhUa8FlGTCab3LI4yYuTq7VnoQHXV7clRKyfu2105FRS7JfCEoePiVkMpQ=="
+    ], 
     "./doc/authors.rst": [], 
+    "./doc/conf.py": [
+        "F8GU4GDPPeAfUTpN076wJ/quVTvYjN9mNOcd1DwPicZFCmd7IXBr/zyG//p+cX/TOiOEAgAWvLM0BLIuhjeHJA=="
+    ], 
     "./doc/contributing.rst": [], 
     "./doc/history.rst": [], 
     "./doc/index.rst": [], 
     "./doc/installation.rst": [], 
+    "./doc/make.bat": [
+        "Tk/+eZHH7Ss0u6nDShjeISQZmDwP2+T79T9iaBXwWtSC2AJBYjifliRsFaupRval8lXgd0Jg4jNRMcDOC31oaw=="
+    ], 
     "./doc/readme.rst": [], 
     "./doc/usage.rst": [], 
     "./dvlpt_requirements.txt": [
-        "7qCwtiSkTCCwUiBVSlCKEg4ALocoRmCb6MhuUhYiBnOh9kgt/8hxRo98NW6+HjxQOlV8XpRarjAQri/t912eXQ=="
+        "5VCiwJ35q+LLd9W2JFPFipXJTuG9EpLagqIG+TSQpa1HIIxuXROEkS+NVl6HRLlMYznq+m2HhRXBdCsrzAqI3g=="
     ], 
     "./requirements.txt": [
         "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
