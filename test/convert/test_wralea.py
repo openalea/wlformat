@@ -111,7 +111,8 @@ def test_import_workflow():
                             'port_hide_changed': set(),
                             'posx': -607.1703903388244,
                             'posy': -85.555388524075241,
-                            'priority': 0}},
+                            'priority': 0}
+                        },
               elt_value={2: [(1, "'float64'"), (2, 'True'),
                              (3, "'C'"), (4, 'False'),
                              (5, '0')],
@@ -130,7 +131,8 @@ def test_import_workflow():
                               -607.1703903388244,
                               -85.555388524075241],
                               'userColor': (0, 0, 0),
-                              'useUserColor': True}},
+                              'useUserColor': True}
+                          },
               lazy=True,
               eval_algo='LambdaEvaluation',
               )
