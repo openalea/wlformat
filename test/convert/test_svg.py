@@ -391,3 +391,100 @@ def test_export_workflow_handle_interface_url():
     assert "my_pretty_url1" in txt
     assert "my_pretty_url2" in txt
 
+
+def test_export_node():
+    node = {
+        "id": "nodeab8cead211e586286003089581fc",
+        "version": 0,
+        "name": "some node",
+        "description": "test node",
+        "author": "unknown",
+        "function": "func",
+        "inputs": [
+            {
+                "default": "0",
+                "interface": "int",
+                "description": "some input",
+                "name": "in1"
+            },
+            {
+                "default": "1",
+                "interface": "int",
+                "description": "some other input",
+                "name": "in2"
+            }
+        ],
+        "outputs": [
+            {
+                "default": "",
+                "interface": "any",
+                "description": "result",
+                "name": "out"
+            }
+        ]}
+
+    store = {}
+
+    txt = svg.export_node(node, store)
+    assert node['name'] in txt
+    assert "in1" in txt
+    assert "in2" in txt
+    assert "out" in txt
+
+
+def test_export_node_handle_interface_url():
+    idef1 = {
+        "id": "idef1b8cead211e586286003089581fc",
+        "version": 0,
+        "name": "ITest1",
+        "description": "test interface1",
+        "author": "unknown",
+        "url": "my_pretty_url1",
+        "schema": {}
+    }
+    idef2 = {
+        "id": "idef2b8cead211e586286003089581fc",
+        "version": 0,
+        "name": "ITest2",
+        "description": "test interface2",
+        "author": "unknown",
+        "url": "my_pretty_url2",
+        "schema": {}
+    }
+
+    node = {
+        "id": "nodeab8cead211e586286003089581fc",
+        "version": 0,
+        "name": "some node",
+        "description": "test node",
+        "author": "unknown",
+        "function": "func",
+        "inputs": [
+            {
+                "default": "0",
+                "interface": "idef1b8cead211e586286003089581fc",
+                "description": "some input",
+                "name": "in1"
+            },
+            {
+                "default": "1",
+                "interface": "int",
+                "description": "some other input",
+                "name": "in2"
+            }
+        ],
+        "outputs": [
+            {
+                "default": "",
+                "interface": "idef2b8cead211e586286003089581fc",
+                "description": "result",
+                "name": "out"
+            }
+        ]}
+
+    store = {idef1['id']: idef1, idef2['id']: idef2}
+
+    txt = svg.export_node(node, store)
+    assert "my_pretty_url1" in txt
+    assert "my_pretty_url2" in txt
+
