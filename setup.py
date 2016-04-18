@@ -3,9 +3,6 @@
 
 # {{pkglts pysetup.kwds,
 # format setup arguments
-from os import walk
-from os.path import abspath, normpath
-from os.path import join as pj
 from setuptools import setup, find_packages
 
 
@@ -26,11 +23,10 @@ def parse_requirements(fname):
 
     return reqs
 
-# find version number in /src/$pkg_pth/version.py
+# find version number in src/openalea/wlformat/version.py
 version = {}
 with open("src/openalea/wlformat/version.py") as fp:
     exec(fp.read(), version)
-
 
 
 setup_kwds = dict(
