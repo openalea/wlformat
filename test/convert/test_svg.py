@@ -76,7 +76,7 @@ def test_export_workflow():
 
     store = {node['id']: node}
 
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "wkf_node_0" in txt
     assert "wkf_node_1" in txt
     assert "wkf_node_2" in txt
@@ -169,12 +169,12 @@ def test_export_workflow_handle_missing_definitions():
     }
 
     store = {}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "node0" in txt
     assert "node1" in txt
 
     store = {node['id']: node}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "wkf_link_0" in txt
     assert "wkf_link_1" in txt
 
@@ -227,11 +227,11 @@ def test_export_workflow_handle_label():
     }
 
     store = {}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "node0" in txt
 
     store = {node['id']: node}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "some node" in txt
 
     wkf = {
@@ -252,7 +252,7 @@ def test_export_workflow_handle_label():
     }
 
     store = {}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "takapouet" in txt
 
 
@@ -305,11 +305,11 @@ def test_export_workflow_handle_node_url():
     }
 
     store = {}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "my_pretty_url" not in txt
 
     store = {node['id']: node}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "my_pretty_url" in txt
 
 
@@ -379,15 +379,15 @@ def test_export_workflow_handle_interface_url():
     }
 
     store = {}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "my_pretty_url1" not in txt
 
     store = {node['id']: node}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "my_pretty_url1" not in txt
 
     store = {node['id']: node, idef1['id']: idef1, idef2['id']: idef2}
-    txt = svg.export_workflow(wkf, store)
+    txt, bb = svg.export_workflow(wkf, store)
     assert "my_pretty_url1" in txt
     assert "my_pretty_url2" in txt
 
@@ -425,7 +425,7 @@ def test_export_node():
 
     store = {}
 
-    txt = svg.export_node(node, store)
+    txt, bb = svg.export_node(node, store)
     assert node['name'] in txt
     assert "in1" in txt
     assert "in2" in txt
@@ -484,7 +484,7 @@ def test_export_node_handle_interface_url():
 
     store = {idef1['id']: idef1, idef2['id']: idef2}
 
-    txt = svg.export_node(node, store)
+    txt, bb = svg.export_node(node, store)
     assert "my_pretty_url1" in txt
     assert "my_pretty_url2" in txt
 

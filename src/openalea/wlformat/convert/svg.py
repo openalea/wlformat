@@ -236,7 +236,7 @@ def export_workflow(workflow, store, size=None):
 
     paper.viewbox(xmin, ymin, xsize, ysize)
 
-    return paper.tostring()
+    return paper.tostring(), (xmin, ymin, xsize, ysize)
 
 
 def export_node(node, store, size=None):
@@ -377,4 +377,4 @@ def export_node(node, store, size=None):
 
     paper.viewbox(xmin, ymin, xsize, ysize)
 
-    return paper.tostring()
+    return paper.tostring(), (xmin, ymin, xsize, ysize)

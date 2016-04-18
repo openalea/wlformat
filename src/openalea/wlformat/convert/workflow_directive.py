@@ -83,7 +83,7 @@ class WorkflowPlotDirective(Directive):
             w = self.options.get('width', 600)
             h = self.options.get('height', 600)
 
-            drawing = svg.export_workflow(wkf, {}, (w, h))
+            drawing, bb = svg.export_workflow(wkf, {}, (w, h))
 
             with open(svg_file, 'w') as f:
                 f.write(drawing)
