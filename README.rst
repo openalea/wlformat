@@ -12,7 +12,7 @@ OpenALEA Workflow Language Format
     :alt: Travis build status
     :target: https://travis-ci.org/openalea/wlformat
 
-.. image:: https://coveralls.io/repos/openalea/wlformat/badge.svg?branch=master&service=github
+.. image:: https://coveralls.io/repos/github/openalea/wlformat/badge.svg?branch=master
     :alt: Coverage report status
     :target: https://coveralls.io/github/openalea/wlformat?branch=master
 
