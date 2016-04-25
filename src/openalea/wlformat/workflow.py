@@ -1,9 +1,4 @@
-import json
-from jsonschema import Draft4Validator, RefResolver
-import os
-
-
-here = os.path.dirname(__file__)
+import tools
 
 
 def validate(workflow_descr):
@@ -15,9 +10,4 @@ def validate(workflow_descr):
     Returns:
         (bool) - true if description match workflow json schema
     """
-    with open(os.path.join(here, "schema_workflow.json"), 'r') as f:
-        schema = json.load(f)
-
-    refres = RefResolver("file:///%s/" % here, schema)
-    val = Draft4Validator(schema, resolver=refres)
-    return val.is_valid(workflow_descr)
+    return tools.validate(workflow_descr, "workflow")

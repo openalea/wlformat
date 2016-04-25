@@ -1,9 +1,4 @@
-import json
-from jsonschema import Draft4Validator, RefResolver
-import os
-
-
-here = os.path.dirname(__file__)
+import tools
 
 
 def validate(node_descr):
@@ -15,9 +10,4 @@ def validate(node_descr):
     Returns:
         (bool) - true if description match node json schema
     """
-    with open(os.path.join(here, "schema_node.json"), 'r') as f:
-        schema = json.load(f)
-
-    refres = RefResolver("file:///%s/" % here, schema)
-    val = Draft4Validator(schema, resolver=refres)
-    return val.is_valid(node_descr)
+    return tools.validate(node_descr, "node")
