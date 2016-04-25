@@ -15,6 +15,7 @@ def validate(data_descr):
     Returns:
         (bool) - true if description match node json schema
     """
+    print "HERE3", here
     with open(os.path.join(here, "schema_data.json"), 'r') as f:
         schema = json.load(f)
 
