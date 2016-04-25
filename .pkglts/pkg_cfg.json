@@ -6,7 +6,7 @@
     }, 
     "base": {
         "namespace": "openalea", 
-        "owner": "revesansparole", 
+        "owner": "openalea", 
         "pkgname": "wlformat", 
         "url": null
     }, 

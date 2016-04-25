@@ -8,17 +8,17 @@ OpenALEA Workflow Language Format
     :alt: Documentation status
     :target: https://wlformat.readthedocs.org/en/latest/?badge=latest
 
-.. image:: https://travis-ci.org/revesansparole/wlformat.svg?branch=master
+.. image:: https://travis-ci.org/openalea/wlformat.svg?branch=master
     :alt: Travis build status
-    :target: https://travis-ci.org/revesansparole/wlformat
+    :target: https://travis-ci.org/openalea/wlformat
 
-.. image:: https://coveralls.io/repos/revesansparole/wlformat/badge.svg?branch=master&service=github
+.. image:: https://coveralls.io/repos/openalea/wlformat/badge.svg?branch=master&service=github
     :alt: Coverage report status
-    :target: https://coveralls.io/github/revesansparole/wlformat?branch=master
+    :target: https://coveralls.io/github/openalea/wlformat?branch=master
 
-.. image:: https://landscape.io/github/revesansparole/wlformat/master/landscape.svg?style=flat
+.. image:: https://landscape.io/github/openalea/wlformat/master/landscape.svg?style=flat
     :alt: Code health status
-    :target: https://landscape.io/github/revesansparole/wlformat/master
+    :target: https://landscape.io/github/openalea/wlformat/master
 
 
 .. }}

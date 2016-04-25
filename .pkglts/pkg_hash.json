@@ -18,14 +18,14 @@
         "YTUhuNoVK2IXgwJI+cP4BUzbgzMOnHhc40N8Q9cw1rJVtKJq8xlQNaYwxt2Y8p+scpKOU4S445VaPOqWsEF6+Q=="
     ], 
     "./README.rst": [
-        "s8jsr58NJ3GAz7jvEV9zPvrheJF0+drnojkpdGUx/SUxdanUc8wALUpaPW/1jDEUtP24kPk+xOGmwRiBp3yZSg=="
+        "ASz0JGlhFjVWlxT9VPvDW0O1zWWaPjLggAIN6cDZ5w4tVbf7neUUidc9w4l8St3OfBwOtOzRm52j5Aw3lDI0Ug=="
     ], 
     "./doc/Makefile": [
         "fCpQbGBjkltJc0kS1o3WrQeqpsOzMhUa8FlGTCab3LI4yYuTq7VnoQHXV7clRKyfu2105FRS7JfCEoePiVkMpQ=="
     ], 
     "./doc/authors.rst": [], 
     "./doc/conf.py": [
-        "OwtGKmjj7jPYeNtC3A8wi4+CAkPQJEI79a4cl8Iu6RvA4jYA64WZQ4eLbEz7wlzZTug+T8pLUBlge2CwIFxMKw=="
+        "yS39t3wccOsZZhnMVDK0yO+sNprqDW7cCjgG28kHFpTSk4hmWM/InpnzeIGHc6ISu+cyW2sYjrSG1R1Ro5Ac9A=="
     ], 
     "./doc/contributing.rst": [], 
     "./doc/history.rst": [], 
@@ -46,7 +46,7 @@
         "zS6Ewop/bv6w2IqgobeqavBhoJb3Yafp1AyaprFpfv0jwVW+8Rnaj46bLCWStDBpdfeWvQ11tnttv8PeyqatmA=="
     ], 
     "./setup.py": [
-        "isZaU1nCEL3h9FRZ2cyLqWgj30jr/sBqocO/Bfukylj9t7GH6uxkvAoZprjkStPzS3ess30s+lOc0hQs3MLOZw==", 
+        "bAOTAP9I4zDrNY4Pyr5X66/h6cSKmIVfAGlOJt7FBv+mentUUOIamIR/nerQ7apFSj1EjfNQGljvi+Wo3yprwA==", 
         "6tA9s9cbDHz4mx0PGt+gMLM9HamuOYqFGjwc7LYZcM72XjiUaG0A7g6hNS+gy8cS0FyZDnf46GLNwx0mNZUs7Q=="
     ], 
     "./src/openalea.wlformat.egg-info/PKG-INFO": [
@@ -71,7 +71,6 @@
     "./src/openalea/wlformat/convert/workflow_directive.py": [], 
     "./src/openalea/wlformat/convert/wralea.py": [], 
     "./src/openalea/wlformat/data_interface.py": [], 
-    "./src/openalea/wlformat/example.py": [], 
     "./src/openalea/wlformat/node.py": [], 
     "./src/openalea/wlformat/prov_exe.py": [], 
     "./src/openalea/wlformat/schema_base.json": [], 
@@ -79,6 +78,7 @@
     "./src/openalea/wlformat/schema_node.json": [], 
     "./src/openalea/wlformat/schema_prov_exe.json": [], 
     "./src/openalea/wlformat/schema_workflow.json": [], 
+    "./src/openalea/wlformat/tools.py": [], 
     "./src/openalea/wlformat/version.py": [
         "9u2W46jEMEMq3ZJFhNBSDLcfV8R73vM1FPWlZz2LsxyOwW1/0fpDM16Yxig6tFhfdhNxz+Qw8gX0btUZqB898w=="
     ], 
@@ -88,7 +88,6 @@
     "./test/convert/test_graphviz.py": [], 
     "./test/convert/test_svg.py": [], 
     "./test/convert/test_wralea.py": [], 
-    "./test/test_example.py": [], 
     "./test/test_schema_validity.py": [], 
     "./test/test_validate_data.py": [], 
     "./test/test_validate_node.py": [], 

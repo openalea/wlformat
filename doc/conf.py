@@ -243,7 +243,7 @@ latex_elements = {
 latex_documents = [
     ('index', 'wlformat.tex',
      u'wlformat Documentation',
-     u'revesansparole', 'manual'),
+     u'openalea', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -274,7 +274,7 @@ latex_documents = [
 man_pages = [
     ('index', 'wlformat',
      u'wlformat Documentation',
-     [u'revesansparole'], 1)
+     [u'openalea'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -289,7 +289,7 @@ man_pages = [
 texinfo_documents = [
     ('index', 'wlformat',
      u'wlformat Documentation',
-     u'revesansparole',
+     u'openalea',
      'wlformat',
      'Objects descriptions for workflow related environments',
      'Miscellaneous'),
