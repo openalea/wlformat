@@ -19,6 +19,8 @@ def validate(data_descr):
     with open(os.path.join(here, "schema_data.json"), 'r') as f:
         schema = json.load(f)
 
-    refres = RefResolver("file:///%s/" % here[1:], schema)
+    base_uri = "file:///%s/" % (here[1:])
+    print "BASE_URI", base_uri
+    refres = RefResolver(base_uri, schema)
     val = Draft4Validator(schema, resolver=refres)
     return val.is_valid(data_descr)
