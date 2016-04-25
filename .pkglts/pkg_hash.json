@@ -4,6 +4,10 @@
     "./.gitignore": [
         "+K/4XGP2Peb5jWR7nzmpli9QQT/NXtwbXHyE3BnTHOEAdwTiRpmD0k++rjO/416VXZCr7l+3j3X8YUhN+Ku0MA=="
     ], 
+    "./.landscape.yml": [], 
+    "./.travis.yml": [
+        "xjWsAB0nti/NMay8tUPUmwb/OZODF/Mm3tdBZ17ljg1UAI4hpvNzMM37AWnT/761Z9PAWUGYPwijssHdm69GdQ=="
+    ], 
     "./AUTHORS.rst": [], 
     "./CONTRIBUTING.rst": [], 
     "./HISTORY.rst": [], 
@@ -14,7 +18,7 @@
         "YTUhuNoVK2IXgwJI+cP4BUzbgzMOnHhc40N8Q9cw1rJVtKJq8xlQNaYwxt2Y8p+scpKOU4S445VaPOqWsEF6+Q=="
     ], 
     "./README.rst": [
-        "NpInImcdK7HQFLVdzLlDEZbA9uAEZaKM6lTCUCfQi5aOf93nTfnCh9DJp9Dr0ZWsxXLXTQrH3g+rbgh7kRECnA=="
+        "s8jsr58NJ3GAz7jvEV9zPvrheJF0+drnojkpdGUx/SUxdanUc8wALUpaPW/1jDEUtP24kPk+xOGmwRiBp3yZSg=="
     ], 
     "./doc/Makefile": [
         "fCpQbGBjkltJc0kS1o3WrQeqpsOzMhUa8FlGTCab3LI4yYuTq7VnoQHXV7clRKyfu2105FRS7JfCEoePiVkMpQ=="
@@ -33,13 +37,13 @@
     "./doc/readme.rst": [], 
     "./doc/usage.rst": [], 
     "./dvlpt_requirements.txt": [
-        "5VCiwJ35q+LLd9W2JFPFipXJTuG9EpLagqIG+TSQpa1HIIxuXROEkS+NVl6HRLlMYznq+m2HhRXBdCsrzAqI3g=="
+        "PJKp3evhpR80ed54hM9o073+5Hf0goc9Og3YRbGvyzmyW7UoN1OzYI2MBcNNuYirQdtnspVygDRPtBz+ea4C7g=="
     ], 
     "./requirements.txt": [
         "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
     ], 
     "./setup.cfg": [
-        "4TAPwqD6Ppf57HSkkcfez4KLyyOQH8SYloJ1EqIqYdwNuU2/cu2dXWVqG9jTltcPJJut97zyvoYjlFuqW3uz9g=="
+        "zS6Ewop/bv6w2IqgobeqavBhoJb3Yafp1AyaprFpfv0jwVW+8Rnaj46bLCWStDBpdfeWvQ11tnttv8PeyqatmA=="
     ], 
     "./setup.py": [
         "isZaU1nCEL3h9FRZ2cyLqWgj30jr/sBqocO/Bfukylj9t7GH6uxkvAoZprjkStPzS3ess30s+lOc0hQs3MLOZw==", 
@@ -96,6 +100,7 @@
     "./try/convert node.py": [], 
     "./try/draw svg.py": [], 
     "./try/node.json": [], 
+    "./try/node.svg": [], 
     "./try/wkf.svg": [], 
     "./try/workflow.json": []
 }

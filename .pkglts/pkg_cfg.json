@@ -11,13 +11,16 @@
         "url": null
     }, 
     "coverage": {}, 
+    "coveralls": {}, 
     "doc": {
         "description": "Objects descriptions for workflow related environments", 
         "keywords": []
     }, 
+    "flake8": {}, 
     "github": {
         "project": "{{key, base.pkgname}}"
     }, 
+    "landscape": {}, 
     "license": {
         "name": "cecill-c", 
         "organization": "OpenALEA", 
@@ -31,10 +34,14 @@
             "27"
         ]
     }, 
+    "readthedocs": {
+        "project": "{{key, github.project}}"
+    }, 
     "sphinx": {
         "theme": "default"
     }, 
     "test": {}, 
+    "travis": {}, 
     "version": {
         "major": 0, 
         "minor": 1, 

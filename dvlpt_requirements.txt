@@ -1,8 +1,9 @@
 # {{pkglts pysetup.dvlpt_requirements,
-github3.py
 sphinx
+github3.py
 nose
 coverage
 mock
+flake8
 
 # }}
