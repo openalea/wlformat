@@ -4,7 +4,7 @@ from svgwrite import Drawing
 
 
 def draw_node(paper, workflow, store, node, ind):
-    """Draw a single node of a workflow definition
+    """Draw a single node of a workflow definition.
 
     Args:
         paper (svgwrite.Paper):
@@ -102,7 +102,7 @@ def draw_node(paper, workflow, store, node, ind):
 
 
 def port_index(ports, port_name):
-    """Find index of named port
+    """Find index of named port.
 
     Args:
         ports (list of ports):
@@ -119,7 +119,7 @@ def port_index(ports, port_name):
 
 
 def draw_link(paper, workflow, store, link, ind):
-    """Draw a single node of a workflow definition
+    """Draw a single node of a workflow definition.
 
     Args:
         paper (svgwrite.Paper):
@@ -165,7 +165,7 @@ def draw_link(paper, workflow, store, link, ind):
 
 
 def export_workflow(workflow, store, size=None):
-    """Construct a SVG description for a workflow
+    """Construct a SVG description for a workflow.
 
     Args:
         workflow (WorkflowDef)
@@ -240,7 +240,7 @@ def export_workflow(workflow, store, size=None):
 
 
 def export_node(node, store, size=None):
-    """Construct a SVG description for a workflow node
+    """Construct a SVG description for a workflow node.
 
     Args:
         node (NodeDef)

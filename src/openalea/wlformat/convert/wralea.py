@@ -4,7 +4,7 @@ from uuid import uuid1
 
 
 def find_wralea_interface(store, name):
-    """Find an interface in store from its name
+    """Find an interface in store from its name.
 
     Args:
         store: (dict of uid, def)
@@ -22,7 +22,7 @@ def find_wralea_interface(store, name):
 
 
 def register_wralea_interface(store, name):
-    """Register an interface in store whose name is given
+    """Register an interface in store whose name is given.
 
     Args:
         store: (dict of uid, def)
@@ -46,7 +46,7 @@ def register_wralea_interface(store, name):
 
 
 def find_wralea_node(store, func_desc):
-    """Find a node in store whose name is pkg: func_name
+    """Find a node in store whose name is pkg: func_name.
 
     Args:
         store: (dict of uid, ndef)
@@ -65,7 +65,7 @@ def find_wralea_node(store, func_desc):
 
 
 def register_wralea_node(store, func_desc):
-    """Register a node in store whose name is pkg: func_name
+    """Register a node in store whose name is pkg: func_name.
 
     Args:
         store: (dict of uid, ndef)
@@ -150,7 +150,7 @@ def import_node(nf, store, pkgname):
 
 
 def import_workflow(cnf, store):
-    """Construct a workflow definition from a composite node factory
+    """Construct a workflow definition from a composite node factory.
 
     Warnings: modify store in place
 

@@ -55,7 +55,6 @@
     "./src/openalea.wlformat.egg-info/SOURCES.txt": [], 
     "./src/openalea.wlformat.egg-info/dependency_links.txt": [], 
     "./src/openalea.wlformat.egg-info/not-zip-safe": [], 
-    "./src/openalea.wlformat.egg-info/pbr.json": [], 
     "./src/openalea.wlformat.egg-info/requires.txt": [], 
     "./src/openalea.wlformat.egg-info/top_level.txt": [], 
     "./src/openalea/__init__.py": [
@@ -73,11 +72,6 @@
     "./src/openalea/wlformat/data_interface.py": [], 
     "./src/openalea/wlformat/node.py": [], 
     "./src/openalea/wlformat/prov_exe.py": [], 
-    "./src/openalea/wlformat/schema_base.json": [], 
-    "./src/openalea/wlformat/schema_data.json": [], 
-    "./src/openalea/wlformat/schema_node.json": [], 
-    "./src/openalea/wlformat/schema_prov_exe.json": [], 
-    "./src/openalea/wlformat/schema_workflow.json": [], 
     "./src/openalea/wlformat/tools.py": [], 
     "./src/openalea/wlformat/version.py": [
         "9u2W46jEMEMq3ZJFhNBSDLcfV8R73vM1FPWlZz2LsxyOwW1/0fpDM16Yxig6tFhfdhNxz+Qw8gX0btUZqB898w=="
@@ -97,9 +91,5 @@
     "./try/convert all nodes.py": [], 
     "./try/convert cnf.py": [], 
     "./try/convert node.py": [], 
-    "./try/draw svg.py": [], 
-    "./try/node.json": [], 
-    "./try/node.svg": [], 
-    "./try/wkf.svg": [], 
-    "./try/workflow.json": []
+    "./try/draw svg.py": []
 }

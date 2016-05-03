@@ -2,7 +2,7 @@ import tools
 
 
 def validate(node_descr):
-    """Check that the description is a valid workflow node description
+    """Check that the description is a valid workflow node description.
 
     Args:
         node_descr: (dict)

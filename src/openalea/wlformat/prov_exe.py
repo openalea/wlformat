@@ -2,8 +2,7 @@ import tools
 
 
 def validate(prov_descr):
-    """Check that the description is a valid workflow
-    execution provenance description.
+    """Check that the description is a valid execution provenance description.
 
     Args:
         prov_descr: (dict)

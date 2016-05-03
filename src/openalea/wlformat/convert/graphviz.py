@@ -3,7 +3,7 @@
 
 
 def export_workflow(wkf, store):
-    """Construct a graphviz description for a workflow
+    """Construct a graphviz description for a workflow.
 
     Args:
         wkf: (WorkflowDef)

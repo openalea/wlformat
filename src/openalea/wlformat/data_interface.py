@@ -2,7 +2,7 @@ import tools
 
 
 def validate(data_descr):
-    """Check that the description is a valid data interface description
+    """Check that the description is a valid data interface description.
 
     Args:
         data_descr: (dict)

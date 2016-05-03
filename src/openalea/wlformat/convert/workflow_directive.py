@@ -7,7 +7,8 @@
         height: 200
 
 
-options are identical to the image/plot/figure directives (width, scale, height, ...)
+options are identical to the image/plot/figure directives
+(width, scale, height, ...)
 
 .. moduleauthor:: Jerome Chopard
 """
@@ -49,12 +50,13 @@ def out_of_date(original, derived):
 
 
 def align(argument):
-    """Conversion function for the "align" option."""
+    """Conversion function for the "align" option.
+    """
     return directives.choice(argument, ('left', 'center', 'right'))
 
 
 class WorkflowPlotDirective(Directive):
-    """Main directive to render `.. workflow::`directives
+    """Main directive to render `.. workflow::`directives.
     """
 
     required_arguments = 1

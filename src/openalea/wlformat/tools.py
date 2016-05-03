@@ -6,7 +6,7 @@ here = os.path.dirname(__file__)
 
 
 def validate(obj_descr, schema_name):
-    """Check that the description is a valid data interface description
+    """Check that the description is a valid data interface description.
 
     Args:
         obj_descr: (dict)
@@ -15,8 +15,8 @@ def validate(obj_descr, schema_name):
     Returns:
         (bool) - true if description match node json schema
     """
-    with open(os.path.join(here, "schema_%s.json" % schema_name), 'r') as f:
-        schema = json.load(f)
+    with open(os.path.join(here, "schema_%s.json" % schema_name), 'r') as fs:
+        schema = json.load(fs)
 
     if here.startswith("/"):
         base_uri = "file:///%s/" % (here[1:])
