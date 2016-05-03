@@ -1,4 +1,6 @@
-import tools
+"""Workflow node helper functions.
+"""
+from . import tools
 
 
 def validate(node_descr):

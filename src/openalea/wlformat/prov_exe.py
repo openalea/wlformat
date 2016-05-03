@@ -1,4 +1,6 @@
-import tools
+"""Workflow execution provenance helper functions.
+"""
+from . import tools
 
 
 def validate(prov_descr):

@@ -1,4 +1,6 @@
-import tools
+"""Data helper functions.
+"""
+from . import tools
 
 
 def validate(data_descr):
