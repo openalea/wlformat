@@ -1,5 +1,5 @@
-"""Converter (reader only) for wralea files
-"""
+"""Converter (reader only) for wralea files."""
+
 from uuid import uuid1
 
 
@@ -13,7 +13,7 @@ def find_wralea_interface(store, name):
     Returns:
         (idef|None) - returns None if no such interface exists
     """
-    for uid, (typ, idef) in store.items():
+    for typ, idef in store.values():
         if typ == "data":
             if idef["name"] == name:
                 return idef
@@ -56,7 +56,7 @@ def find_wralea_node(store, func_desc):
         (ndef|None) - returns None if no such node exists
     """
     name = "%s: %s" % func_desc
-    for uid, (typ, ndef) in store.items():
+    for typ, ndef in store.values():
         if typ == "node":
             if ndef["name"] == name:
                 return ndef
@@ -164,7 +164,7 @@ def import_workflow(cnf, store):
     Returns:
         (dict) - workflow definition
     """
-    for lid, link in cnf.connections.items():
+    for link in cnf.connections.values():
         src, ipid, tgt, opid = link
         if src == '__in__' or tgt == '__out__':
             return None
