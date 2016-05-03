@@ -248,7 +248,7 @@ def import_workflow(cnf, store):
 
         wdef['nodes'].append(node)
 
-    for lid, link in cnf.connections.items():
+    for link in cnf.connections.values():
         src, ipid, tgt, opid = link
         new_link = dict(source=ntrans[src],
                         source_port=str(ipid),

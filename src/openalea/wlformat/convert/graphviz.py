@@ -1,5 +1,4 @@
-"""Converter (writer only) for graphviz dot files
-"""
+"""Converter (writer only) for graphviz dot files."""
 
 
 def export_workflow(wkf, store):

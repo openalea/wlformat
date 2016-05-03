@@ -1,5 +1,5 @@
-"""Converter (writer only) for svg files
-"""
+"""Converter (writer only) for svg files."""
+
 from svgwrite import Drawing
 
 

@@ -1,3 +1,5 @@
+"""Simple tools reused in different parts."""
+
 import json
 from jsonschema import Draft4Validator, RefResolver
 import os
