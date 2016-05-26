@@ -1,5 +1,5 @@
 =================================
-OpenALEA Workflow Language Format
+OpenAlea Workflow Language Format
 =================================
 
 .. {{pkglts doc,
