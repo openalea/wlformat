@@ -1,7 +1,5 @@
-# {{pkglts pysetup.install_requirements,
+# {# pkglts, pysetup
 
-
-# }}
-
+# #}
 jsonschema
 svgwrite

@@ -1,1 +1,60 @@
-{}
+{
+  ".coveragerc": {
+    "coverage": "ph7w5C2yzrzfuELcjkZwarGbh4T7OoIxZsFf95UzYOzs3MYzVKNvdoWeb3RXfgFgJbsPsLOuUxT2Bkr3eNhIng=="
+  }, 
+  ".gitignore": {
+    "github": "JBFVvS/5R+7jHXhwLTspKaBcopxdpZ0nEwRy78CJnankSdhc5QpA4n4IIxxjNW9fMHc1ZM5Up2ihTC/3TjsT8g=="
+  }, 
+  ".landscape.yml": {}, 
+  ".travis.yml": {
+    "travis": "BrsEVYH84BS/QRHNfJk7UlQS7ZjNHD8cNj+PgFfVuux0QkSV86BZWxhtz2tNfdeSjqYBuEhcooPcKVYgXcjCIQ=="
+  }, 
+  "AUTHORS.rst": {}, 
+  "CONTRIBUTING.rst": {}, 
+  "HISTORY.rst": {}, 
+  "LICENSE": {
+    "license": "21ExMhSzB2uXQuU1VoH7++nrb4u6TbesqGtJDpM39OLPWft9SJ2tJ956R6foYmkI9VuJay7SUrhFLPxxMEHLxg=="
+  }, 
+  "MANIFEST.in": {
+    "pysetup": "vzgcfdwg7fafu0G3HEmFsZnC8jB8sa4zeSFQ2ReZO+pUfGeynOcw4+CIzP/ZV7n5nmpGGI7xqcdcPtOFfoivdQ=="
+  }, 
+  "README.rst": {
+    "doc": "sdVCUAy2fcnlsQx7q7vRRpNwM9dCZIQg86BIQC+No65YJyXkPnB8rp9m0dwdFyGT/MaZjaMg4DP/QxOGE4b0Bw=="
+  }, 
+  "doc/Makefile": {
+    "sphinx": "C58jxdu8XJNOoaWOw7VWy4LwFmS8lTQt/JeZLt5JozMSJ503plOZchucx+vAEzELbx/Czs/h9pshe9s+9HeOeQ=="
+  }, 
+  "doc/authors.rst": {}, 
+  "doc/conf.py": {
+    "sphinx": "d5+ZSN0PRojOHESocGGhwaEIB7ySbykpLfuH65aswlO42PSaZ6bNqr6i5aYxK9qHZf1+d99riISlCrRD0781Zw=="
+  }, 
+  "doc/contributing.rst": {}, 
+  "doc/history.rst": {}, 
+  "doc/index.rst": {}, 
+  "doc/installation.rst": {}, 
+  "doc/make.bat": {
+    "sphinx": "oA67PK7JSR3w9u1V0gOXFZAb8qgfgUJ0wQ46cVXu7M3iJyAbLf76WkEqw6Y1r5Q6EvHAogcjmImdGsOpiYZ22g=="
+  }, 
+  "doc/readme.rst": {}, 
+  "doc/usage.rst": {}, 
+  "dvlpt_requirements.txt": {
+    "pysetup": "ZwaIOgoqmAAYyh2Xxc+pdP3IUz1OriL7LOefsCEaIxo9HtM9QrwEhJ93P4ptz1roGZnY6O/+DEKPbMCs7DtWSw=="
+  }, 
+  "requirements.txt": {
+    "pysetup": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg=="
+  }, 
+  "setup.cfg": {
+    "pysetup": "b06s2uvpaMmzdNxaFuKGoT3qhXIcC7zAflli8cuWPEg/aqaooagBRR9oA5kdSJFj8uzcl16e0mj6jKn5ZB6sEg=="
+  }, 
+  "setup.py": {
+    "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==", 
+    "pysetup.kwds": "j+8MQw18I38u4/ysOjOR5yER9NvMcQjRS5ySja2e+oBCx6QxMeZEjuic42YuBx7U+AwSoe7RpbeejHWW7prF3Q=="
+  }, 
+  "src/openalea/wlformat/__init__.py": {
+    "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="
+  }, 
+  "src/openalea/wlformat/version.py": {
+    "version": "MZQTyEWit00FyaHwKsLqNb75QNv3vLclB89WuWGu6O4JykKb6Sq0P0oJvi7GG8nww7FI5CvJKXnZBkvF1PFJXg=="
+  }, 
+  "test/__init__.py": {}
+}

@@ -18,6 +18,14 @@ Simple usage:
     from openalea.wlformat import *
 
 
+Contribute
+==========
+
+Fork this project on github_
+
+.. _github: https://github.com/openalea/wlformat
+
+
 
 Acknowledgments
 ===============

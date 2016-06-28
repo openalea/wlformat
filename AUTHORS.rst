@@ -6,7 +6,7 @@ Development Lead
 ----------------
 
 
-* base.author_name <base.author_email>
+* openalea, <revesansparole@gmail.com>
 
 
 Contributors
