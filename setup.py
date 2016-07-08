@@ -12,18 +12,6 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 
-def parse_requirements(fname):
-    with open(fname, 'r') as f:
-        txt = f.read()
-
-    reqs = []
-    for line in txt.splitlines():
-        line = line.strip()
-        if len(line) > 0 and not line.startswith("#"):
-            reqs.append(line)
-
-    return reqs
-
 # find version number in src/openalea/wlformat/version.py
 version = {}
 with open("src/openalea/wlformat/version.py") as fp:
@@ -43,8 +31,18 @@ setup_kwds = dict(
 
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    install_requires=parse_requirements("requirements.txt"),
-    tests_require=parse_requirements("dvlpt_requirements.txt"),
+    install_requires=[
+        "jsonschema",
+        "svgwrite",
+        ],
+    tests_require=[
+        "coverage",
+        "flake8",
+        "mock",
+        "nose",
+        "sphinx",
+        "coveralls",
+        ],
     entry_points={},
     keywords='',
     test_suite='nose.collector',

@@ -1,54 +1,59 @@
 {
-    "_pkglts": {
-        "auto_install": true, 
-        "install_front_end": "stdout", 
-        "use_prompts": false,
-        "version": 2
-    }, 
-    "base": {
-        "authors": [
-            ["openalea", "revesansparole@gmail.com"]
-        ],
-        "namespace": "openalea",
-        "pkgname": "wlformat",
-        "url": null
-    }, 
-    "coverage": {}, 
-    "coveralls": {}, 
-    "doc": {
-        "description": "Objects descriptions for workflow related environments", 
-        "keywords": []
-    }, 
-    "flake8": {}, 
-    "github": {
-        "owner": "{{ base.authors[0][0] }}",
-        "project": "{{ base.pkgname }}",
-        "url": "https://github.com/{{ github.owner }}/{{ github.project }}"
-    }, 
-    "landscape": {}, 
-    "license": {
-        "name": "cecill-c", 
-        "organization": "OpenAlea",
-        "project": "{{ base.pkgname }}",
-        "year": "2016"
-    }, 
-    "pysetup": {
-        "intended_versions": [
-            "27"
-        ]
-    }, 
-    "readthedocs": {
-        "project": "{{ github.project }}"
-    }, 
-    "sphinx": {
-        "autodoc_dvlpt": true,
-        "theme": "default"
-    }, 
-    "test": {}, 
-    "travis": {}, 
-    "version": {
-        "major": 0, 
-        "minor": 2,
-        "post": 0
-    }
+  "_pkglts": {
+    "auto_install": true, 
+    "install_front_end": "stdout", 
+    "use_prompts": false, 
+    "version": 3
+  }, 
+  "base": {
+    "authors": [
+      [
+        "openalea", 
+        "revesansparole@gmail.com"
+      ]
+    ], 
+    "namespace": "openalea", 
+    "pkgname": "wlformat", 
+    "url": null
+  }, 
+  "coverage": {}, 
+  "coveralls": {}, 
+  "doc": {
+    "description": "Objects descriptions for workflow related environments", 
+    "keywords": []
+  }, 
+  "flake8": {}, 
+  "github": {
+    "owner": "{{ base.authors[0][0] }}", 
+    "project": "{{ base.pkgname }}", 
+    "url": "https://github.com/{{ github.owner }}/{{ github.project }}"
+  }, 
+  "landscape": {}, 
+  "license": {
+    "name": "cecill-c", 
+    "organization": "OpenAlea", 
+    "project": "{{ base.pkgname }}", 
+    "year": "2016"
+  }, 
+  "pysetup": {
+    "intended_versions": [
+      "27"
+    ], 
+    "require": [[null, "jsonschema"],
+                ["pip", "svgwrite"]]
+  }, 
+  "readthedocs": {
+    "project": "{{ github.project }}"
+  }, 
+  "sphinx": {
+    "autodoc_dvlpt": true, 
+    "theme": "default"
+  }, 
+  "test": {}, 
+  "travis": {}, 
+  "version": {
+    "major": 0, 
+    "minor": 2, 
+    "post": 0
+  }
 }
