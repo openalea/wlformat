@@ -1,5 +1,6 @@
 """Converter (reader only) for wralea files."""
 
+from datetime import datetime
 from uuid import uuid1
 
 
@@ -21,12 +22,13 @@ def find_wralea_interface(store, name):
     return None
 
 
-def register_wralea_interface(store, name):
+def register_wralea_interface(store, name, author="unknown"):
     """Register an interface in store whose name is given.
 
     Args:
-        store: (dict of uid, def)
-        name: (str) name of interface
+        store (dict of uid, def):
+        name (str): name of interface
+        author (str): owner of interface definition
 
     Returns:
         (idef) - interface definition
@@ -35,7 +37,7 @@ def register_wralea_interface(store, name):
     idef = dict(id=uid,
                 name=name,
                 description="",
-                author="unknown",
+                author=author,
                 version=0,
                 schema={},
                 ancestors=[])
@@ -103,26 +105,29 @@ def import_node(nf, store, pkgname):
         (dict) - workflow definition
     """
     name = "%s: %s" % (pkgname, nf.name)
+    author = nf.get_authors()
+    if author.endswith(" (wralea authors)"):
+        author = author[:-17]
+    if len(author) == 0:
+        author="unknown"
 
     ndef = dict(id=uuid1().hex,
                 name=name,
                 description=nf.description,
-                author="unknown",
+                creator=author,
+                created=datetime.now().isoformat(),
                 version=0,
                 function="py:%s#%s" % (nf.nodemodule_name,
                                        nf.nodeclass_name),
                 inputs=[],
                 outputs=[])
 
-    inputs = nf.inputs
-    if inputs is None:
-        inputs = []
-
-    for port in inputs:
+    for port in nf.inputs:
         iname = str(port.get('interface', "any"))
         idef = find_wralea_interface(store, iname)
         if idef is None:
-            idef = register_wralea_interface(store, iname)
+            msg = "unable to find proper def for interface '%s'" % iname
+            raise UserWarning(msg)
 
         pdef = dict(name=port.get('name', 'in'),
                     interface=idef['id'],
@@ -130,15 +135,12 @@ def import_node(nf, store, pkgname):
                     description=port.get("descr", ""))
         ndef['inputs'].append(pdef)
 
-    outputs = nf.outputs
-    if outputs is None:
-        outputs = []
-
-    for port in outputs:
+    for port in nf.outputs:
         iname = str(port.get('interface', "any"))
         idef = find_wralea_interface(store, iname)
         if idef is None:
-            idef = register_wralea_interface(store, iname)
+            msg = "unable to find proper def for interface '%s'" % iname
+            raise UserWarning(msg)
 
         pdef = dict(name=port.get('name', 'out'),
                     interface=idef['id'],
@@ -169,10 +171,17 @@ def import_workflow(cnf, store):
         if src == '__in__' or tgt == '__out__':
             return None
 
+    author = cnf.get_authors()
+    if author.endswith(" (wralea authors)"):
+        author = author[:-17]
+    if len(author) == 0:
+        author="unknown"
+
     wdef = dict(id=uuid1().hex,
                 name=cnf.name,
                 description=cnf.description,
-                author="unknown",
+                creator=author,
+                created=datetime.now().isoformat(),
                 version=0,
                 nodes=[],
                 links=[])
@@ -182,7 +191,7 @@ def import_workflow(cnf, store):
         ntrans[nid] = len(wdef['nodes'])
         ndef = find_wralea_node(store, func_desc)
         if ndef is None:
-            ndef = register_wralea_node(store, func_desc)
+            raise UserWarning("unknown node %s: %s" % func_desc)
 
         node = dict(id=ndef['id'])
         # data
