@@ -319,7 +319,10 @@ def export_node(node, store, size=None):
         label.add(frag)
         pg.add(label)
         # port interface
-        itxt = pdef['interface']
+        if idef is None:
+            itxt = pdef['interface']
+        else:
+            itxt = idef['name']
         if len(itxt) > 10:
             itxt = itxt[:7] + "..."
         frag = paper.tspan(itxt, dy=[2 * pr + 3])
@@ -349,7 +352,10 @@ def export_node(node, store, size=None):
         label.add(frag)
         pg.add(label)
         # port interface
-        itxt = pdef['interface']
+        if idef is None:
+            itxt = pdef['interface']
+        else:
+            itxt = idef['name']
         if len(itxt) > 10:
             itxt = itxt[:7] + "..."
         frag = paper.tspan(itxt, dy=[-2 * pr + 3])
