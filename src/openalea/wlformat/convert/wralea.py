@@ -109,7 +109,7 @@ def import_node(nf, store, pkgname):
     if author.endswith(" (wralea authors)"):
         author = author[:-17]
     if len(author) == 0:
-        author="unknown"
+        author = "unknown"
 
     ndef = dict(id=uuid1().hex,
                 name=name,
@@ -175,7 +175,7 @@ def import_workflow(cnf, store):
     if author.endswith(" (wralea authors)"):
         author = author[:-17]
     if len(author) == 0:
-        author="unknown"
+        author = "unknown"
 
     wdef = dict(id=uuid1().hex,
                 name=cnf.name,
@@ -258,11 +258,17 @@ def import_workflow(cnf, store):
         wdef['nodes'].append(node)
 
     for link in cnf.connections.values():
-        src, ipid, tgt, opid = link
+        src, opid, tgt, ipid = link
+        # find port names instead of indexes
+        src_typ, src_def = store[wdef['nodes'][ntrans[src]]['id']]
+        src_pname = src_def['outputs'][opid]['name']
+        tgt_typ, tgt_def = store[wdef['nodes'][ntrans[tgt]]['id']]
+        tgt_pname = tgt_def['inputs'][ipid]['name']
+
         new_link = dict(source=ntrans[src],
-                        source_port=str(ipid),
+                        source_port=src_pname,
                         target=ntrans[tgt],
-                        target_port=str(opid))
+                        target_port=tgt_pname)
         wdef['links'].append(new_link)
 
     return wdef
