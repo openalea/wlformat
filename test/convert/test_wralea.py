@@ -11,7 +11,7 @@ if run_test:
     from openalea.wlformat.convert import wralea
 
 
-    def test_import_node():
+    def test_convert_node():
         nf = NF(name="color",
                 authors="moi",
                 description="edit color",
@@ -25,7 +25,9 @@ if run_test:
                 )
 
         store = {}
-        ndef = wralea.import_node(nf, store, "pkg")
+        wralea.register_interface(store, "triplet")
+        wralea.register_interface(store, "rgb")
+        ndef = wralea.convert_node(nf, store, "pkg")
 
         assert len(store) == 2
         assert 'color' in ndef['name']
@@ -34,8 +36,9 @@ if run_test:
         assert len(ndef['outputs']) == 1
 
 
-    def test_import_node_reuse_interfaces_definitions():
+    def test_convert_node_reuse_interfaces_definitions():
         nf = NF(name="color",
+                authors="moi",
                 description="edit color",
                 category="datatype, image",
                 nodemodule="openalea.color.py_color",
@@ -47,32 +50,36 @@ if run_test:
                 )
 
         store = {}
-        ndef = wralea.import_node(nf, store, "pkg")
+        wralea.register_interface(store, "triplet")
+        wralea.register_interface(store, "rgb")
+        ndef = wralea.convert_node(nf, store, "pkg")
         assert len(store) == 2
 
-        ndef2 = wralea.import_node(nf, store, "pkg")
+        ndef2 = wralea.convert_node(nf, store, "pkg")
 
         assert len(store) == 2
         assert ndef2['inputs'][0]['interface'] == ndef['inputs'][0]['interface']
         assert ndef2['outputs'][0]['interface'] == ndef['outputs'][0]['interface']
 
 
-    def test_import_node_handle_none_instead_of_empty_lists():
+    def test_convert_node_handle_none_instead_of_empty_lists():
         nf = NF(name="color",
+                authors="moi",
                 description="edit color",
                 category="datatype, image",
                 nodemodule="openalea.color.py_color",
                 nodeclass="ColorNode")
 
         store = {}
-        ndef = wralea.import_node(nf, store, "pkg")
+        ndef = wralea.convert_node(nf, store, "pkg")
         assert len(store) == 0
         assert len(ndef['inputs']) == 0
         assert len(ndef['outputs']) == 0
 
 
-    def test_import_workflow():
+    def test_convert_workflow():
         cnf = CNF(name='dummy',
+                  authors="moi",
                   description='Some description',
                   category='doofus',
                   doc='Some Documentation',
@@ -147,16 +154,37 @@ if run_test:
                   )
 
         store = {}
-        wdef = wralea.import_workflow(cnf, store)
+        idef = wralea.register_interface(store, "any")
+        ndef = wralea.register_node(store, ('openalea.numpy.creation', 'array'))
+        ndef['outputs'] = [dict(name="out0",
+                                interface=idef['id'],
+                                default="",
+                                description=""),
+                           dict(name="out1",
+                                interface=idef['id'],
+                                default="",
+                                description="")]
+        ndef = wralea.register_node(store,
+                                    ('openalea.data structure.list', 'list'))
+        ndef['inputs'] = [dict(name="in0",
+                               interface=idef['id'],
+                               default="",
+                               description=""),
+                          dict(name="in1",
+                               interface=idef['id'],
+                               default="",
+                               description="")]
+        wdef = wralea.convert_workflow(cnf, store)
 
-        assert len(store) == 2
+        assert len(store) == 3
         assert wdef['description'] == cnf.description
         assert len(wdef['nodes']) == 3
         assert len(wdef['links']) == 2
 
 
-    def test_import_workflow_reuse_node_definitions():
+    def test_convert_workflow_reuse_node_definitions():
         cnf = CNF(name='dummy',
+                  authors="moi",
                   description='Some description',
                   category='doofus',
                   doc='Some Documentation',
@@ -170,17 +198,38 @@ if run_test:
                   )
 
         store = {}
-        wdef = wralea.import_workflow(cnf, store)
-        assert len(store) == 2
+        idef = wralea.register_interface(store, "any")
+        ndef = wralea.register_node(store, ('openalea.numpy.creation', 'array'))
+        ndef['outputs'] = [dict(name="out0",
+                                interface=idef['id'],
+                                default="",
+                                description=""),
+                           dict(name="out1",
+                                interface=idef['id'],
+                                default="",
+                                description="")]
+        ndef = wralea.register_node(store,
+                                    ('openalea.data structure.list', 'list'))
+        ndef['inputs'] = [dict(name="in0",
+                               interface=idef['id'],
+                               default="",
+                               description=""),
+                          dict(name="in1",
+                               interface=idef['id'],
+                               default="",
+                               description="")]
+        wdef = wralea.convert_workflow(cnf, store)
+        assert len(store) == 3
 
-        wdef2 = wralea.import_workflow(cnf, store)
-        assert len(store) == 2
+        wdef2 = wralea.convert_workflow(cnf, store)
+        assert len(store) == 3
 
         assert wdef2['nodes'][0]['id'] == wdef['nodes'][0]['id']
 
 
-    def test_import_workflow_return_none_for_composite_nodes():
+    def test_convert_workflow_return_none_for_composite_nodes():
         cnf = CNF(name='dummy',
+                  authors="moi",
                   description='Some description',
                   category='doofus',
                   doc='Some Documentation',
@@ -194,5 +243,5 @@ if run_test:
                   )
 
         store = {}
-        wdef = wralea.import_workflow(cnf, store)
+        wdef = wralea.convert_workflow(cnf, store)
         assert wdef is None

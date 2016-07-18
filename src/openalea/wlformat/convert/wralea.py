@@ -122,7 +122,10 @@ def convert_node(nf, store, pkgname):
                 inputs=[],
                 outputs=[])
 
-    for port in nf.inputs:
+    inputs = nf.inputs
+    if inputs is None:
+        inputs = []
+    for port in inputs:
         iname = str(port.get('interface', "any"))
         idef = get_interface_by_name(store, iname)
         if idef is None:
@@ -135,7 +138,10 @@ def convert_node(nf, store, pkgname):
                     description=port.get("descr", ""))
         ndef['inputs'].append(pdef)
 
-    for port in nf.outputs:
+    outputs = nf.outputs
+    if outputs is None:
+        outputs = []
+    for port in outputs:
         iname = str(port.get('interface', "any"))
         idef = get_interface_by_name(store, iname)
         if idef is None:
