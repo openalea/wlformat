@@ -13,6 +13,7 @@ if run_test:
 
     def test_import_node():
         nf = NF(name="color",
+                authors="moi",
                 description="edit color",
                 category="datatype, image",
                 nodemodule="openalea.color.py_color",

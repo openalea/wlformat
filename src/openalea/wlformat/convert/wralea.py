@@ -4,7 +4,7 @@ from datetime import datetime
 from uuid import uuid1
 
 
-def find_wralea_interface(store, name):
+def get_interface_by_name(store, name):
     """Find an interface in store from its name.
 
     Args:
@@ -22,7 +22,7 @@ def find_wralea_interface(store, name):
     return None
 
 
-def register_wralea_interface(store, name, author="unknown"):
+def register_interface(store, name, author="unknown"):
     """Register an interface in store whose name is given.
 
     Args:
@@ -37,7 +37,7 @@ def register_wralea_interface(store, name, author="unknown"):
     idef = dict(id=uid,
                 name=name,
                 description="",
-                author=author,
+                owner=author,
                 version=0,
                 schema={},
                 ancestors=[])
@@ -47,7 +47,7 @@ def register_wralea_interface(store, name, author="unknown"):
     return idef
 
 
-def find_wralea_node(store, func_desc):
+def get_node_by_func_desc(store, func_desc):
     """Find a node in store whose name is pkg: func_name.
 
     Args:
@@ -66,7 +66,7 @@ def find_wralea_node(store, func_desc):
     return None
 
 
-def register_wralea_node(store, func_desc):
+def register_node(store, func_desc):
     """Register a node in store whose name is pkg: func_name.
 
     Args:
@@ -80,7 +80,7 @@ def register_wralea_node(store, func_desc):
     ndef = dict(id=uid,
                 name="%s: %s" % func_desc,
                 description="%s: %s" % func_desc,
-                author="unknown",
+                owner="unknown",
                 version=0,
                 function="null",
                 inputs=[],
@@ -91,7 +91,7 @@ def register_wralea_node(store, func_desc):
     return ndef
 
 
-def import_node(nf, store, pkgname):
+def convert_node(nf, store, pkgname):
     """Convert a NodeFactory into a node file.
 
     Warnings: modify store in place to add unregistered interfaces
@@ -114,7 +114,7 @@ def import_node(nf, store, pkgname):
     ndef = dict(id=uuid1().hex,
                 name=name,
                 description=nf.description,
-                creator=author,
+                owner=author,
                 created=datetime.now().isoformat(),
                 version=0,
                 function="py:%s#%s" % (nf.nodemodule_name,
@@ -124,7 +124,7 @@ def import_node(nf, store, pkgname):
 
     for port in nf.inputs:
         iname = str(port.get('interface', "any"))
-        idef = find_wralea_interface(store, iname)
+        idef = get_interface_by_name(store, iname)
         if idef is None:
             msg = "unable to find proper def for interface '%s'" % iname
             raise UserWarning(msg)
@@ -137,7 +137,7 @@ def import_node(nf, store, pkgname):
 
     for port in nf.outputs:
         iname = str(port.get('interface', "any"))
-        idef = find_wralea_interface(store, iname)
+        idef = get_interface_by_name(store, iname)
         if idef is None:
             msg = "unable to find proper def for interface '%s'" % iname
             raise UserWarning(msg)
@@ -151,7 +151,7 @@ def import_node(nf, store, pkgname):
     return ndef
 
 
-def import_workflow(cnf, store):
+def convert_workflow(cnf, store):
     """Construct a workflow definition from a composite node factory.
 
     Warnings: modify store in place
@@ -180,7 +180,7 @@ def import_workflow(cnf, store):
     wdef = dict(id=uuid1().hex,
                 name=cnf.name,
                 description=cnf.description,
-                creator=author,
+                owner=author,
                 created=datetime.now().isoformat(),
                 version=0,
                 nodes=[],
@@ -189,7 +189,7 @@ def import_workflow(cnf, store):
     ntrans = {}
     for nid, func_desc in cnf.elt_factory.items():
         ntrans[nid] = len(wdef['nodes'])
-        ndef = find_wralea_node(store, func_desc)
+        ndef = get_node_by_func_desc(store, func_desc)
         if ndef is None:
             raise UserWarning("unknown node %s: %s" % func_desc)
 
