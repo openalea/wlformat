@@ -6,7 +6,7 @@ def test_valid_schema():
         "id": "4675bc70dbdb11e5b310ace010ea24cf",
         "name": "plus",
         "description": "Add two numbers together",
-        "author": "unknown",
+        "owner": "unknown",
         "version": 0,
         "function": "sample_project.nodes:plus",
         "inputs": [

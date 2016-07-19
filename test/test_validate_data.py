@@ -5,7 +5,7 @@ def test_valid_schema():
     ddef = {
         "id": "url12345678912345678945612358794",
         "name": "url",
-        "author": "revesansparole",
+        "owner": "revesansparole",
         "version": 0,
         "description": "Url type of data",
         "schema": {

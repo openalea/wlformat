@@ -5,7 +5,7 @@ def test_valid_schema():
     wdef = {
         "id": "bb060be1da2c11e5a216ace010ea24cf",
         "name": "Test Workflow",
-        "author": "revesansparole",
+        "owner": "revesansparole",
         "version": 0,
         "description": "debug purpose only",
         "nodes": [

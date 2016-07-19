@@ -19,7 +19,7 @@
       "description": "A display name",
       "type": "string"
     },
-    "author": {
+    "owner": {
       "description": "Author who created this object",
       "type": "string"
     },
@@ -36,7 +36,7 @@
   "required": [
     "id",
     "name",
-    "author",
+    "owner",
     "version",
     "description"
   ]

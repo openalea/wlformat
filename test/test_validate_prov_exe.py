@@ -5,7 +5,7 @@ def test_valid_schema():
     pdef = {
         "id": "bb060be1da2c11e5a216ace010ea24cf",
         "name": "Test Workflow Prov",
-        "author": "revesansparole",
+        "owner": "revesansparole",
         "version": 0,
         "description": "debug purpose only",
         "workflow": "wkf60be1da2c11e5a216ace010ea24cf",
