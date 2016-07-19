@@ -50,6 +50,8 @@ setup_kwds = dict(
 # #}
 # change setup_kwds below before the next pkglts tag
 
+setup_kwds['entry_points']['wralea'] = ['openalea.wlformat = openalea.wlformat_wralea']
+
 # do not change things below
 # {# pkglts, pysetup.call
 setup(**setup_kwds)
