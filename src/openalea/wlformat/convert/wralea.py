@@ -104,6 +104,11 @@ def convert_node(nf, store, pkgname):
     Returns:
         (dict) - workflow definition
     """
+    try:
+        uid = nf.uid
+    except AttributeError:
+        uid = uuid1().hex
+
     name = "%s: %s" % (pkgname, nf.name)
     author = nf.get_authors()
     if author.endswith(" (wralea authors)"):
@@ -111,7 +116,7 @@ def convert_node(nf, store, pkgname):
     if len(author) == 0:
         author = "unknown"
 
-    ndef = dict(id=uuid1().hex,
+    ndef = dict(id=uid,
                 name=name,
                 description=nf.description,
                 owner=author,
@@ -177,13 +182,18 @@ def convert_workflow(cnf, store):
         if src == '__in__' or tgt == '__out__':
             return None
 
+    try:
+        uid = cnf.uid
+    except AttributeError:
+        uid = uuid1().hex
+
     author = cnf.get_authors()
     if author.endswith(" (wralea authors)"):
         author = author[:-17]
     if len(author) == 0:
         author = "unknown"
 
-    wdef = dict(id=uuid1().hex,
+    wdef = dict(id=uid,
                 name=cnf.name,
                 description=cnf.description,
                 owner=author,
