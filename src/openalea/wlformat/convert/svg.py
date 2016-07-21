@@ -3,6 +3,21 @@
 from svgwrite import Drawing
 
 
+def sanitize(name):
+    """Remove troubling elements from name
+
+    Args:
+        name (str): the text to transform
+
+    Returns:
+        (str): same text without spaces, (, )
+    """
+    san = name.replace(" ", "")
+    san = san.replace("(", "")
+    san = san.replace(")", "")
+    return san
+
+
 def draw_node(paper, workflow, store, node, ind):
     """Draw a single node of a workflow definition.
 
@@ -72,7 +87,7 @@ def draw_node(paper, workflow, store, node, ind):
             px = i * pr * 4 - (nb - 1) * 2 * pr
             port = paper.circle((px, py), pr, stroke='#000000', stroke_width=1)
             port.fill("url(#in_port)")
-            pid = "wkf_node_%d_input_%s" % (ind, pdef['name'])
+            pid = "wkf_node_%d_input_%s" % (ind, sanitize(pdef['name']))
 
             idef = store.get(pdef['interface'], None)
             if idef is not None and 'url' in idef:
@@ -89,7 +104,7 @@ def draw_node(paper, workflow, store, node, ind):
             px = i * pr * 4 - (nb - 1) * 2 * pr
             port = paper.circle((px, py), pr, stroke='#000000', stroke_width=1)
             port.fill("url(#out_port)")
-            pid = "wkf_node_%d_output_%s" % (ind, pdef['name'])
+            pid = "wkf_node_%d_output_%s" % (ind, sanitize(pdef['name']))
 
             idef = store.get(pdef['interface'], None)
             if idef is not None and 'url' in idef:
