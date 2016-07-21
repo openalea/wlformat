@@ -47,17 +47,17 @@ def register_interface(store, name, author="unknown"):
     return idef
 
 
-def get_node_by_func_desc(store, func_desc):
+def get_node_by_node_desc(store, node_desc):
     """Find a node in store whose name is pkg: func_name.
 
     Args:
         store: (dict of uid, ndef)
-        func_desc: (str, str) pkg, func_name
+        node_desc: (str, str) pkg, func_name
 
     Returns:
         (ndef|None) - returns None if no such node exists
     """
-    name = "%s: %s" % func_desc
+    name = "%s: %s" % node_desc
     for typ, ndef in store.values():
         if typ == "node":
             if ndef["name"] == name:
@@ -116,14 +116,19 @@ def convert_node(nf, store, pkgname):
     if len(author) == 0:
         author = "unknown"
 
+    try:
+        funcname = "py:%s#%s" % (nf.nodemodule_name,
+                                 nf.nodeclass_name)
+    except AttributeError:
+        funcname = "unknown"
+
     ndef = dict(id=uid,
                 name=name,
                 description=nf.description,
                 owner=author,
                 created=datetime.now().isoformat(),
                 version=0,
-                function="py:%s#%s" % (nf.nodemodule_name,
-                                       nf.nodeclass_name),
+                function=funcname,
                 inputs=[],
                 outputs=[])
 
@@ -158,6 +163,56 @@ def convert_node(nf, store, pkgname):
                     default=str(port.get("value", "")),
                     description=port.get("descr", ""))
         ndef['outputs'].append(pdef)
+
+    return ndef
+
+
+def convert_data_node(nf, store, pkgname):
+    """Convert a DataFactory into a node file.
+
+    Args:
+        nf: (DataFactory)
+        store: (dict of uid, def) elements definitions
+        pkgname: (str) name of openalea package
+
+    Returns:
+        (dict) - workflow definition
+    """
+    try:
+        uid = nf.uid
+    except AttributeError:
+        uid = uuid1().hex
+
+    name = "%s: %s" % (pkgname, nf.name)
+    author = nf.get_authors()
+    if author.endswith(" (wralea authors)"):
+        author = author[:-17]
+    if len(author) == 0:
+        author = "unknown"
+
+    ndef = dict(id=uid,
+                name=name,
+                description=nf.description,
+                owner=author,
+                created=datetime.now().isoformat(),
+                version=0,
+                function="None",
+                inputs=[],
+                outputs=[])
+
+    iid = get_interface_by_name(store, "any")['id']
+    for iname in ("data", "editors", "includes"):
+        pdef = dict(name=iname,
+                    interface=iid,
+                    default="",
+                    description="")
+        ndef['inputs'].append(pdef)
+
+    pdef = dict(name="data",
+                interface=get_interface_by_name(store, "IData")['id'],
+                default="",
+                description="")
+    ndef['outputs'].append(pdef)
 
     return ndef
 
@@ -203,11 +258,11 @@ def convert_workflow(cnf, store):
                 links=[])
 
     ntrans = {}
-    for nid, func_desc in cnf.elt_factory.items():
+    for nid, node_desc in cnf.elt_factory.items():
         ntrans[nid] = len(wdef['nodes'])
-        ndef = get_node_by_func_desc(store, func_desc)
+        ndef = get_node_by_node_desc(store, node_desc)
         if ndef is None:
-            raise UserWarning("unknown node %s: %s" % func_desc)
+            raise UserWarning("unknown node %s: %s" % node_desc)
 
         node = dict(id=ndef['id'])
         # data
@@ -276,10 +331,20 @@ def convert_workflow(cnf, store):
     for link in cnf.connections.values():
         src, opid, tgt, ipid = link
         # find port names instead of indexes
-        src_typ, src_def = store[wdef['nodes'][ntrans[src]]['id']]
-        src_pname = src_def['outputs'][opid]['name']
-        tgt_typ, tgt_def = store[wdef['nodes'][ntrans[tgt]]['id']]
-        tgt_pname = tgt_def['inputs'][ipid]['name']
+        try:
+            src_typ, src_def = store[wdef['nodes'][ntrans[src]]['id']]
+            src_pname = src_def['outputs'][opid]['name']
+        except IndexError as e:
+            print src_typ, src_def
+            print "opid", opid
+            raise e
+        try:
+            tgt_typ, tgt_def = store[wdef['nodes'][ntrans[tgt]]['id']]
+            tgt_pname = tgt_def['inputs'][ipid]['name']
+        except IndexError as e:
+            print tgt_typ, tgt_def
+            print "ipid", ipid
+            raise e
 
         new_link = dict(source=ntrans[src],
                         source_port=src_pname,
