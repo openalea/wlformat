@@ -258,7 +258,8 @@ def convert_workflow(cnf, store):
                 links=[])
 
     ntrans = {}
-    for nid, node_desc in cnf.elt_factory.items():
+    nodes = [(nid, node_desc) for nid, node_desc in cnf.elt_factory.items()]
+    for nid, node_desc in sorted(nodes):
         ntrans[nid] = len(wdef['nodes'])
         ndef = get_node_by_node_desc(store, node_desc)
         if ndef is None:
