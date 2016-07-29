@@ -1,6 +1,15 @@
 """Converter (writer only) for svg files."""
-
 from svgwrite import Drawing
+
+node_width = 60
+# node_height = 30
+port_radius = 4
+node_padding = 5
+
+label_font = "verdana"
+label_font_size = 12
+
+draw_padding = 20
 
 
 def sanitize(name):
@@ -18,6 +27,24 @@ def sanitize(name):
     return san
 
 
+def compute_node_width(nf, label):
+    """Compute minimal width of node
+
+    Args:
+        nf (dict): node definition
+        label (str): label used for this node
+
+    Returns:
+        (int): size in pixels
+    """
+    label_size = len(label) * label_font_size * 0.7
+
+    nb = max(len(nf['inputs']), len(nf['outputs']))
+    nw = max(label_size + 2 * node_padding,
+             port_radius * (nb * port_radius + port_radius))
+    return nw
+
+
 def draw_node(paper, workflow, store, node, ind):
     """Draw a single node of a workflow definition.
 
@@ -32,17 +59,29 @@ def draw_node(paper, workflow, store, node, ind):
         None: add elements to paper in place
     """
     del workflow
-
-    nw = 80
-    nh = 40
-    pr = 5
-
     nf = store.get(node['id'], None)
 
-    if nf is not None:
-        nb = max(len(nf['inputs']), len(nf['outputs']))
-        nw = max(nw, pr * (nb * 4 + 4))
+    # label
+    label_txt = None
+    if 'label' in node:
+        label_txt = node['label']
 
+    if label_txt is None:
+        if nf is None:
+            label_txt = "node%d" % ind
+        else:
+            label_txt = nf['name']
+
+    # node size
+    pr = port_radius
+    if nf is None:
+        nw = node_width
+    else:
+        nw = compute_node_width(nf, label_txt)
+
+    nh = label_font_size + 2 * pr + (2 * node_padding) * 0.5
+
+    # draw
     g = paper.add(paper.g())
     g.translate(node['x'], node['y'])
     if nf is not None and 'url' in nf:
@@ -63,18 +102,9 @@ def draw_node(paper, workflow, store, node, ind):
         bg.fill("url(#bg_loaded)")
 
     # label
-    label_txt = None
-    if 'label' in node:
-        label_txt = node['label']
-
-    if label_txt is None:
-        if nf is None:
-            label_txt = "node%d" % ind
-        else:
-            label_txt = nf['name']
-
-    style = 'font-size: 18px; font-family: verdana; text-anchor: middle'
-    frag = paper.tspan(label_txt, dy=[5])
+    style = ('font-size: %dpx; font-family: %s; '
+             'text-anchor: middle' % (label_font_size, label_font))
+    frag = paper.tspan(label_txt, dy=[label_font_size // 3])
     label = paper.text("", style=style, fill='#000000')
     label.add(frag)
     link.add(label)
@@ -146,8 +176,8 @@ def draw_link(paper, workflow, store, link, ind):
     Returns:
         None: add elements to paper in place
     """
-    nh = 40
-    pr = 5
+    pr = port_radius
+    nh = label_font_size + 2 * pr + (2 * node_padding) * 0.5
 
     src = workflow['nodes'][link['source']]
     src_x = src['x']
@@ -198,10 +228,9 @@ def export_workflow(workflow, store, size=None):
     if size is None:
         size = (600, 600)
 
-    nw = 80
-    nh = 40
-    pr = 5
-    padding = 20
+    pr = port_radius
+    nw = node_width
+    nh = label_font_size + 2 * pr + (2 * node_padding) * 0.5
 
     paper = Drawing("workflow.svg", size, id="repr")
 
@@ -231,10 +260,10 @@ def export_workflow(workflow, store, size=None):
     for i, node in enumerate(workflow['nodes']):
         draw_node(paper, workflow, store, node, i)
 
-    xmin = min(node['x'] for node in workflow['nodes']) - nw / 2 - padding
-    xmax = max(node['x'] for node in workflow['nodes']) + nw / 2 + padding
-    ymin = min(node['y'] for node in workflow['nodes']) - nh / 2 - pr - padding
-    ymax = max(node['y'] for node in workflow['nodes']) + nh / 2 + pr + padding
+    xmin = min(node['x'] for node in workflow['nodes']) - nw / 2 - draw_padding
+    xmax = max(node['x'] for node in workflow['nodes']) + nw / 2 + draw_padding
+    ymin = min(node['y'] for node in workflow['nodes']) - nh / 2 - pr - draw_padding
+    ymax = max(node['y'] for node in workflow['nodes']) + nh / 2 + pr + draw_padding
 
     w = float(size[0])
     h = float(size[1])
@@ -266,7 +295,6 @@ def export_node(node, store, size=None):
         (str) - SVG description of workflow node
     """
     pr = 15
-    padding = 20
 
     if size is None:
         size = (600, 600)
@@ -378,10 +406,10 @@ def export_node(node, store, size=None):
         label.add(frag)
         link.add(label)
 
-    xmin = - nw / 2 - padding
-    xmax = + nw / 2 + padding
-    ymin = - nh / 2 - pr * 3 - padding
-    ymax = + nh / 2 + pr * 3 + padding
+    xmin = - nw / 2 - draw_padding
+    xmax = + nw / 2 + draw_padding
+    ymin = - nh / 2 - pr * 3 - draw_padding
+    ymax = + nh / 2 + pr * 3 + draw_padding
 
     w = float(size[0])
     h = float(size[1])
