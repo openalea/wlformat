@@ -6,10 +6,24 @@ node_width = 60
 port_radius = 4
 node_padding = 5
 
-label_font = "verdana"
+label_font = "courier"
 label_font_size = 12
+port_font_size = 10
 
 draw_padding = 20
+
+
+def string_size(txt, font_size):
+    """Average length of txt in pixels
+
+    Args:
+        txt (str): text
+        font_size (int): size of font in pixels
+
+    Returns:
+        (float)
+    """
+    return len(txt) * font_size * 0.8
 
 
 def sanitize(name):
@@ -27,21 +41,22 @@ def sanitize(name):
     return san
 
 
-def compute_node_width(nf, label):
+def compute_node_width(nf, label, port_spacing):
     """Compute minimal width of node
 
     Args:
         nf (dict): node definition
         label (str): label used for this node
+        port_spacing (int): spacing in pixels between two ports
 
     Returns:
         (int): size in pixels
     """
-    label_size = len(label) * label_font_size * 0.7
+    label_size = string_size(label, label_font_size)
 
     nb = max(len(nf['inputs']), len(nf['outputs']))
     nw = max(label_size + 2 * node_padding,
-             port_radius * (nb * port_radius + port_radius))
+             (nb - 1) * port_spacing + 2 * port_radius + 2 * node_padding)
     return nw
 
 
@@ -74,10 +89,11 @@ def draw_node(paper, workflow, store, node, ind):
 
     # node size
     pr = port_radius
+    pspace = 4 * pr
     if nf is None:
         nw = node_width
     else:
-        nw = compute_node_width(nf, label_txt)
+        nw = compute_node_width(nf, label_txt, pspace)
 
     nh = label_font_size + 2 * pr + (2 * node_padding) * 0.5
 
@@ -92,7 +108,9 @@ def draw_node(paper, workflow, store, node, ind):
     link.attribs['id'] = "wkf_node_%d" % ind
 
     # background
-    bg = paper.rect((-nw / 2, -nh / 2), (nw, nh), rx=5, ry=5, stroke_width=1)
+    bg = paper.rect((-nw / 2, -nh / 2), (nw, nh),
+                    rx=node_padding, ry=node_padding,
+                    stroke_width=1)
     link.add(bg)
     if nf is None:
         bg.stroke('#ff8080')
@@ -114,7 +132,7 @@ def draw_node(paper, workflow, store, node, ind):
         nb = len(nf['inputs'])
         py = -nh / 2
         for i, pdef in enumerate(nf['inputs']):
-            px = i * pr * 4 - (nb - 1) * 2 * pr
+            px = i * pspace - pspace * (nb - 1) / 2
             port = paper.circle((px, py), pr, stroke='#000000', stroke_width=1)
             port.fill("url(#in_port)")
             pid = "wkf_node_%d_input_%s" % (ind, sanitize(pdef['name']))
@@ -131,7 +149,7 @@ def draw_node(paper, workflow, store, node, ind):
         nb = len(nf['outputs'])
         py = nh / 2
         for i, pdef in enumerate(nf['outputs']):
-            px = i * pr * 4 - (nb - 1) * 2 * pr
+            px = i * pspace - pspace * (nb - 1) / 2
             port = paper.circle((px, py), pr, stroke='#000000', stroke_width=1)
             port.fill("url(#out_port)")
             pid = "wkf_node_%d_output_%s" % (ind, sanitize(pdef['name']))
@@ -181,7 +199,8 @@ def draw_link(paper, workflow, store, link, ind):
         None: add elements to paper in place
     """
     pr = port_radius
-    nh = label_font_size + 2 * pr + (2 * node_padding) * 0.5
+    pspace = 4 * pr
+    nh = label_font_size + 2 * pr + (2 * node_padding) * 0.5  # see above
 
     src = workflow['nodes'][link['source']]
     src_x = src['x']
@@ -191,7 +210,7 @@ def draw_link(paper, workflow, store, link, ind):
         i = port_index(nf['outputs'], link['source_port'])
         if i is not None:
             nb = len(nf['outputs'])
-            src_x += i * pr * 4 - (nb - 1) * 2 * pr
+            src_x += i * pspace - pspace * (nb - 1) / 2
             src_y += nh / 2.
 
     tgt = workflow['nodes'][link['target']]
@@ -203,7 +222,7 @@ def draw_link(paper, workflow, store, link, ind):
         i = port_index(nf['inputs'], link['target_port'])
         if i is not None:
             nb = len(nf['inputs'])
-            tgt_x += i * pr * 4 - (nb - 1) * 2 * pr
+            tgt_x += i * pspace - pspace * (nb - 1) / 2
             tgt_y -= nh / 2.
 
     pth = paper.polyline([(src_x, src_y), (tgt_x, tgt_y)],
@@ -232,6 +251,7 @@ def export_workflow(workflow, store, size=None):
     if size is None:
         size = (600, 600)
 
+    # draw
     paper = Drawing("workflow.svg", size, id="repr")
 
     lg = paper.linearGradient((0.5, 0), (0.5, 1.), id="bg_loaded")
@@ -262,6 +282,7 @@ def export_workflow(workflow, store, size=None):
         bb = draw_node(paper, workflow, store, node, i)
         bbs.append(bb)
 
+    # reformat whole drawing to fit screen
     xmin = min(bb[0] for bb in bbs) - draw_padding
     xmax = max(bb[2] for bb in bbs) + draw_padding
     ymin = min(bb[1] for bb in bbs) - draw_padding
@@ -296,8 +317,15 @@ def export_node(node, store, size=None):
     Returns:
         (str) - SVG description of workflow node
     """
-    pr = 15
+    # pr = 15
 
+    # node size
+    pr = port_radius
+    pspace = pr * 9
+    nw = compute_node_width(node, node['name'], pspace)
+    nh = label_font_size + 2 * pr + 2 * port_font_size + 2 + (2 * node_padding)
+
+    # draw
     if size is None:
         size = (600, 600)
 
@@ -314,10 +342,6 @@ def export_node(node, store, size=None):
     paper.defs.add(lg)
 
     # body
-    nb = max(len(node['inputs']), len(node['outputs']))
-    nw = max(300, pr * (nb * 6 + 4))
-    nh = 150
-
     g = paper.add(paper.g())
 
     # background
@@ -326,26 +350,31 @@ def export_node(node, store, size=None):
     lg.add_stop_color(1, color='#c8c8c8')
     paper.defs.add(lg)
 
-    bg = paper.rect((-nw / 2, -nh / 2), (nw, nh), rx=15, ry=15, stroke_width=1)
+    bg = paper.rect((-nw / 2, -nh / 2), (nw, nh),
+                    rx=node_padding, ry=node_padding,
+                    stroke_width=1)
     bg.stroke('#808080')
     bg.fill(lg)
     g.add(bg)
 
     # label
-    style = 'font-size: 22px; font-family: verdana; text-anchor: middle'
-    frag = paper.tspan(node['name'], dy=[7])
+    style = ('font-size: %dpx; font-family: %s; '
+             'text-anchor: middle' % (label_font_size, label_font))
+    frag = paper.tspan(node['name'], dy=[label_font_size // 3])
     label = paper.text("", style=style, fill='#000000')
     label.add(frag)
     g.add(label)
 
     # ports
-    onstyle = 'font-size: 18px; font-family: verdana; text-anchor: end'
-    instyle = 'font-size: 18px; font-family: verdana; text-anchor: start'
-    istyle = 'font-size: 10px; font-family: verdana; text-anchor: middle'
+    port_style = ('font-size: %dpx; ' % port_font_size +
+                  'font-family: %s; ' % label_font)
+    onstyle = port_style + 'text-anchor: end'
+    instyle = port_style + 'text-anchor: start'
+    istyle = port_style + 'text-anchor: middle'
     nb = len(node['inputs'])
     py = -nh / 2
     for i, pdef in enumerate(node['inputs']):
-        px = i * pr * 6 - (nb - 1) * 3 * pr
+        px = i * pspace - pspace * (nb - 1) / 2
         pg = g.add(paper.g())
         pg.translate(px, py)
         idef = store.get(pdef['interface'], None)
@@ -358,7 +387,7 @@ def export_node(node, store, size=None):
         port.fill("url(#in_port)")
         link.add(port)
         # port name
-        frag = paper.tspan(pdef['name'], dy=[-2 * pr + 5])
+        frag = paper.tspan(pdef['name'], dy=[-2 * pr])
         label = paper.text("", style=instyle, fill='#000000')
         label.rotate(-45)
         label.add(frag)
@@ -370,7 +399,7 @@ def export_node(node, store, size=None):
             itxt = idef['name']
         if len(itxt) > 10:
             itxt = itxt[:7] + "..."
-        frag = paper.tspan(itxt, dy=[2 * pr + 3])
+        frag = paper.tspan(itxt, dy=[pr + port_font_size])
         label = paper.text("", style=istyle, fill='#000000')
         label.add(frag)
         link.add(label)
@@ -378,7 +407,7 @@ def export_node(node, store, size=None):
     nb = len(node['outputs'])
     py = nh / 2
     for i, pdef in enumerate(node['outputs']):
-        px = i * pr * 6 - (nb - 1) * 3 * pr
+        px = i * pspace - pspace * (nb - 1) / 2
         pg = g.add(paper.g())
         pg.translate(px, py)
         idef = store.get(pdef['interface'], None)
@@ -391,7 +420,7 @@ def export_node(node, store, size=None):
         port.fill("url(#out_port)")
         link.add(port)
         # port name
-        frag = paper.tspan(pdef['name'], dy=[2 * pr + 5])
+        frag = paper.tspan(pdef['name'], dy=[2 * pr + port_font_size // 2])
         label = paper.text("", style=onstyle, fill='#000000')
         label.rotate(-45)
         label.add(frag)
@@ -403,29 +432,29 @@ def export_node(node, store, size=None):
             itxt = idef['name']
         if len(itxt) > 10:
             itxt = itxt[:7] + "..."
-        frag = paper.tspan(itxt, dy=[-2 * pr + 3])
+        frag = paper.tspan(itxt, dy=[- pr - 2])
         label = paper.text("", style=istyle, fill='#000000')
         label.add(frag)
         link.add(label)
 
-    xmin = - nw / 2 - draw_padding
-    xmax = + nw / 2 + draw_padding
-    ymin = - nh / 2 - pr * 3 - draw_padding
-    ymax = + nh / 2 + pr * 3 + draw_padding
+    # reformat whole drawing to fit screen
+    xmin = - nw / 2 - draw_padding / 10.
+    xmax = + nw / 2 + draw_padding / 10.
+    inames = [(len(pdef['name']), pdef['name']) for pdef in node['inputs']]
+    inames_extend = (string_size(sorted(inames)[-1][1], port_font_size) +
+                     port_font_size) * 0.7
+    ymin = - nh / 2 - pr - inames_extend - draw_padding / 10.
+    onames = [(len(pdef['name']), pdef['name']) for pdef in node['outputs']]
+    onames_extend = (string_size(sorted(onames)[-1][1], port_font_size) +
+                     port_font_size) * 0.7 + 2
+    ymax = + nh / 2 + pr + onames_extend + draw_padding / 10.
 
     w = float(size[0])
     h = float(size[1])
-    xratio = (xmax - xmin) / w
-    yratio = (ymax - ymin) / h
-    if xratio > yratio:
-        xsize = int(xratio * w)
-        ysize = int(xratio * h)
-        ymin -= (ysize - (ymax - ymin)) / 2
-    else:
-        xsize = int(yratio * w)
-        ysize = int(yratio * h)
-        xmin -= (xsize - (xmax - xmin)) / 2
+    ratio = max((xmax - xmin) / w, (ymax - ymin) / h)
+    xsize = int(ratio * w)
+    ysize = int(ratio * h)
 
-    paper.viewbox(xmin, ymin, xsize, ysize)
+    paper.viewbox(-xsize / 2, -ysize / 2, xsize, ysize)
 
-    return paper.tostring(), (xmin, ymin, xsize, ysize)
+    return paper.tostring(), (-xsize / 2, -ysize / 2, xsize, ysize)
