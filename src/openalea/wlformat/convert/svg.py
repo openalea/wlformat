@@ -56,7 +56,7 @@ def draw_node(paper, workflow, store, node, ind):
         ind (int): index of current node
 
     Returns:
-        None: add elements to paper in place
+        (tuple of int): bounding box of drawn element
     """
     del workflow
     nf = store.get(node['id'], None)
@@ -145,6 +145,10 @@ def draw_node(paper, workflow, store, node, ind):
                 port.attribs['id'] = pid
                 g.add(port)
 
+    bb = (node['x'] - nw / 2., node['y'] - nh / 2. - pr,
+          node['x'] + nw / 2., node['y'] + nh / 2. + pr)
+    return bb
+
 
 def port_index(ports, port_name):
     """Find index of named port.
@@ -228,10 +232,6 @@ def export_workflow(workflow, store, size=None):
     if size is None:
         size = (600, 600)
 
-    pr = port_radius
-    nw = node_width
-    nh = label_font_size + 2 * pr + (2 * node_padding) * 0.5
-
     paper = Drawing("workflow.svg", size, id="repr")
 
     lg = paper.linearGradient((0.5, 0), (0.5, 1.), id="bg_loaded")
@@ -257,13 +257,15 @@ def export_workflow(workflow, store, size=None):
     for i, link in enumerate(workflow['links']):
         draw_link(paper, workflow, store, link, i)
 
+    bbs = []
     for i, node in enumerate(workflow['nodes']):
-        draw_node(paper, workflow, store, node, i)
+        bb = draw_node(paper, workflow, store, node, i)
+        bbs.append(bb)
 
-    xmin = min(node['x'] for node in workflow['nodes']) - nw / 2 - draw_padding
-    xmax = max(node['x'] for node in workflow['nodes']) + nw / 2 + draw_padding
-    ymin = min(node['y'] for node in workflow['nodes']) - nh / 2 - pr - draw_padding
-    ymax = max(node['y'] for node in workflow['nodes']) + nh / 2 + pr + draw_padding
+    xmin = min(bb[0] for bb in bbs) - draw_padding
+    xmax = max(bb[2] for bb in bbs) + draw_padding
+    ymin = min(bb[1] for bb in bbs) - draw_padding
+    ymax = max(bb[3] for bb in bbs) + draw_padding
 
     w = float(size[0])
     h = float(size[1])
