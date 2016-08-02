@@ -440,13 +440,19 @@ def export_node(node, store, size=None):
     # reformat whole drawing to fit screen
     xmin = - nw / 2 - draw_padding / 10.
     xmax = + nw / 2 + draw_padding / 10.
-    inames = [(len(pdef['name']), pdef['name']) for pdef in node['inputs']]
-    inames_extend = (string_size(sorted(inames)[-1][1], port_font_size) +
-                     port_font_size) * 0.7
+    if len(node['inputs']) == 0:
+        inames_extend = 0
+    else:
+        inames = [(len(pdef['name']), pdef['name']) for pdef in node['inputs']]
+        inames_extend = (string_size(sorted(inames)[-1][1], port_font_size) +
+                         port_font_size) * 0.7
     ymin = - nh / 2 - pr - inames_extend - draw_padding / 10.
-    onames = [(len(pdef['name']), pdef['name']) for pdef in node['outputs']]
-    onames_extend = (string_size(sorted(onames)[-1][1], port_font_size) +
-                     port_font_size) * 0.7 + 2
+    if len(node['outputs']) == 0:
+        onames_extend = 0
+    else:
+        onames = [(len(pdef['name']), pdef['name']) for pdef in node['outputs']]
+        onames_extend = (string_size(sorted(onames)[-1][1], port_font_size) +
+                         port_font_size) * 0.7 + 2
     ymax = + nh / 2 + pr + onames_extend + draw_padding / 10.
 
     w = float(size[0])
