@@ -316,13 +316,13 @@ def export_node(node, store, size=None):
     Returns:
         (str) - SVG description of workflow node
     """
-    # pr = 15
+    pfs = port_font_size
 
     # node size
     pr = port_radius
     pspace = pr * 9
     nw = compute_node_width(node, node['name'], pspace)
-    nh = label_font_size + 2 * pr + 2 * port_font_size + 2 + (2 * node_padding)
+    nh = label_font_size + 2 * pr + 2 * pfs + 2 + (2 * node_padding)
 
     # draw
     if size is None:
@@ -365,7 +365,7 @@ def export_node(node, store, size=None):
     g.add(label)
 
     # ports
-    port_style = ('font-size: %dpx; ' % port_font_size +
+    port_style = ('font-size: %dpx; ' % pfs +
                   'font-family: %s; ' % label_font)
     onstyle = port_style + 'text-anchor: end'
     instyle = port_style + 'text-anchor: start'
@@ -398,7 +398,7 @@ def export_node(node, store, size=None):
             itxt = idef['name']
         if len(itxt) > 10:
             itxt = itxt[:7] + "..."
-        frag = paper.tspan(itxt, dy=[pr + port_font_size])
+        frag = paper.tspan(itxt, dy=[pr + pfs])
         label = paper.text("", style=istyle, fill='#000000')
         label.add(frag)
         link.add(label)
@@ -419,7 +419,7 @@ def export_node(node, store, size=None):
         port.fill("url(#out_port)")
         link.add(port)
         # port name
-        frag = paper.tspan(pdef['name'], dy=[2 * pr + port_font_size // 2])
+        frag = paper.tspan(pdef['name'], dy=[2 * pr + pfs // 2])
         label = paper.text("", style=onstyle, fill='#000000')
         label.rotate(-45)
         label.add(frag)
@@ -443,23 +443,25 @@ def export_node(node, store, size=None):
         inames_extend = 0
     else:
         inames = [(len(pdef['name']), pdef['name']) for pdef in node['inputs']]
-        inames_extend = (string_size(sorted(inames)[-1][1], port_font_size) +
-                         port_font_size) * 0.7
+        inames_extend = string_size(sorted(inames)[-1][1], pfs) * 0.7 + pfs
     ymin = - nh / 2 - pr - inames_extend - draw_padding / 10.
     if len(node['outputs']) == 0:
         onames_extend = 0
     else:
         onames = [(len(pdef['name']), pdef['name']) for pdef in node['outputs']]
-        onames_extend = (string_size(sorted(onames)[-1][1], port_font_size) +
-                         port_font_size) * 0.7 + 2
+        onames_extend = string_size(sorted(onames)[-1][1], pfs) * 0.7 + pfs
     ymax = + nh / 2 + pr + onames_extend + draw_padding / 10.
 
     w = float(size[0])
     h = float(size[1])
     ratio = max((xmax - xmin) / w, (ymax - ymin) / h)
-    xsize = int(ratio * w)
-    ysize = int(ratio * h)
+    xsize = ratio * w
+    ysize = ratio * h
 
-    paper.viewbox(-xsize / 2, -ysize / 2, xsize, ysize)
+    bb = (xmin * xsize / (xmax - xmin),
+          ymin * ysize / (ymax - ymin),
+          xsize,
+          ysize)
 
-    return paper.tostring(), (-xsize / 2, -ysize / 2, xsize, ysize)
+    paper.viewbox(*bb)
+    return paper.tostring(), bb
