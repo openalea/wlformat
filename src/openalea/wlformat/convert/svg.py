@@ -55,9 +55,8 @@ def compute_node_width(nf, label, port_spacing):
     label_size = string_size(label, label_font_size)
 
     nb = max(len(nf['inputs']), len(nf['outputs']))
-    nw = max(label_size + 2 * node_padding,
-             (nb - 1) * port_spacing + 2 * port_radius + 2 * node_padding)
-    return nw
+    nw = max(label_size, (nb - 1) * port_spacing + 2 * port_radius)
+    return nw + 2 * node_padding
 
 
 def draw_node(paper, workflow, store, node, ind):
